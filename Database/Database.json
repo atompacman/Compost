@@ -1,0 +1,47 @@
+{
+  "Compositions": [
+    {
+      "Attribution": 2,
+      "Authors": [
+        "Moi",
+        "Toi"
+      ],
+      "Description": "Tout premier fichier GP5 enregistré (non-modifié)",
+      "Era": "Yolo",
+      "Genre": "VGM",
+      "Instruments": [
+        "Chiptune"
+      ],
+      "QualityTier": 1,
+      "Resources": [
+        {
+          "Description": "Super meat ballz",
+          "DocType": 2,
+          "Name": "Da Partition",
+          "Versions": [
+            {
+              "CreationDate": "\/Date(1335205592410)\/",
+              "Description": "Killtaculotte",
+              "LastModificationDate": "\/Date(1332205592410)\/",
+              "MajorVersionNumber": 1,
+              "MinorVersionNumber": 4
+            }
+          ]
+        }
+      ],
+      "SetTitle": "Super Mario World",
+      "Subgenre": "SNES",
+      "Title": "Castle Theme"
+    }
+  ],
+  "ExtensionTable": {
+    "Extensions": {
+      "gp5": {
+        "AppPath": "D:\\Program Files (x86)\\Guitar Pro 5\\GP5.exe",
+        "DocType": 0
+      }
+    }
+  },
+  "FileHierarchy": "$CATEGORY\/$ERA\/$SET\/$CREATION_DATE - $TITLE",
+  "Name": "MyCompostDatabase"
+}
