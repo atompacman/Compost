@@ -44,6 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="src\Database\Composition.cs" />
     <Compile Include="src\Database\CompostBrowser.cs">
       <SubType>Form</SubType>
@@ -61,6 +66,10 @@
     <None Include="Properties\DataSources\Compost.Database.Database.datasource" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\Database\CompostBrowser.resx">
       <DependentUpon>CompostBrowser.cs</DependentUpon>
     </EmbeddedResource>

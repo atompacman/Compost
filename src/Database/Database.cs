@@ -22,7 +22,7 @@ namespace Compost.Database
         private static DataContractJsonSerializer s_DCJS;
 
 
-        //  ~  ACCESSORS  ~  \\
+        //  ~  PROPERTIES  ~  \\
 
         [DataMember(IsRequired = true)] internal List<Composition> Compositions   { get; set; }
         [DataMember(IsRequired = true)] internal string            Name           { get; set; }
@@ -51,7 +51,7 @@ namespace Compost.Database
         }
 
 
-        // ~ SAVE ~ \\
+        //  ~  SAVE  ~  \\
 
         internal void Save()
         {

@@ -17,7 +17,7 @@ namespace Compost.Database
             [DataContract]
             internal sealed class Version
             {
-                //  ~  ACCESSORS  ~  \\
+                //  ~  PROPERTIES  ~  \\
 
                 [DataMember(IsRequired = true)] internal uint     MajorVersionNumber   { get; set; }
                 [DataMember(IsRequired = true)] internal uint     MinorVersionNumber   { get; set; }
@@ -37,7 +37,7 @@ namespace Compost.Database
             }
 
 
-            //  ~  ACCESSORS  ~  \\
+            //  ~  PROPERTIES  ~  \\
 
             [DataMember(IsRequired = true)] internal List<Version> Versions    { get; set; }
             [DataMember(IsRequired = true)] internal string        Name        { get; set; }
@@ -62,19 +62,46 @@ namespace Compost.Database
             Diamond
         }
 
+        [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
+        internal sealed class CompositionBrowserColumnInfoAttribute : Attribute
+        {
+            public uint ColumnWidth { get; set; }
+        }
 
-        //  ~  ACCESSORS  ~  \\
 
-        [DataMember(IsRequired = true)] internal List<Resource>  Resources   { get; set; }
-        [DataMember(IsRequired = true)] internal AttributionType Attribution { get; set; }
-        [DataMember(IsRequired = true)] internal List<string>    Authors     { get; set; }
-        [DataMember(IsRequired = true)] internal string          Era         { get; set; }
-        [DataMember(IsRequired = true)] internal string          Genre       { get; set; }
-        [DataMember(IsRequired = true)] internal string          Subgenre    { get; set; }
-        [DataMember(IsRequired = true)] internal string          Title       { get; set; }
-        [DataMember(IsRequired = true)] internal string          SetTitle    { get; set; }
-        [DataMember(IsRequired = true)] internal Tier            QualityTier { get; set; }
-        [DataMember(IsRequired = true)] internal List<string>    Instruments { get; set; }
-        [DataMember(IsRequired = true)] internal string          Description { get; set; }
+        //  ~  PROPERTIES  ~  \\
+
+        [DataMember(IsRequired = true)]
+        internal List<Resource> Resources { get; set; }
+
+        [DataMember(IsRequired = true), CompositionBrowserColumnInfo(ColumnWidth = 100)]
+        internal AttributionType Attribution { get; set; }
+
+        [DataMember(IsRequired = true), CompositionBrowserColumnInfo(ColumnWidth = 477)]
+        internal List<string> Authors { get; set; }
+
+        [DataMember(IsRequired = true), CompositionBrowserColumnInfo(ColumnWidth = 100)]
+        internal string Era { get; set; }
+
+        [DataMember(IsRequired = true), CompositionBrowserColumnInfo(ColumnWidth = 60)]
+        internal string Genre { get; set; }
+
+        [DataMember(IsRequired = true), CompositionBrowserColumnInfo(ColumnWidth = 300)]
+        internal string Subgenre { get; set; }
+
+        [DataMember(IsRequired = true), CompositionBrowserColumnInfo(ColumnWidth = 100)]
+        internal string Title { get; set; }
+
+        [DataMember(IsRequired = true), CompositionBrowserColumnInfo(ColumnWidth = 100)]
+        internal string SetTitle { get; set; }
+
+        [DataMember(IsRequired = true), CompositionBrowserColumnInfo(ColumnWidth = 80)]
+        internal Tier QualityTier { get; set; }
+
+        [DataMember(IsRequired = true), CompositionBrowserColumnInfo(ColumnWidth = 100)]
+        internal List<string> Instruments { get; set; }
+
+        [DataMember(IsRequired = true), CompositionBrowserColumnInfo(ColumnWidth = 100)]
+        internal string Description { get; set; }
     }
 }
