@@ -1,72 +1,79 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IO;
+using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization;
 using System.Windows.Forms;
 
 namespace Compost.Database
 {
     public partial class CompostBrowser : Form
     {
-        //  ~  STATIC FIELDS  ~  \\
+        #region NESTED TYPES
 
-        // Browsers column info
-        private static readonly Dictionary<PropertyInfo, 
-            Composition.CompositionBrowserColumnInfoAttribute> s_CompoBrowserColumnsInfo;
+        [AttributeUsage(AttributeTargets.Property)]
+        public sealed class ColumnInfoAttribute : Attribute
+        {
+            public double RelativeColumnWidth { get; set; }
+        }
 
+        #endregion
 
-        //  ~  FIELDS  ~  \\
+        #region RUNTIME CONSTANTS
 
-        // Current loaded database
+        private static readonly Dictionary<PropertyInfo, ColumnInfoAttribute> COLUMNS_INFO;
+
+        #endregion
+
+        #region PRIVATE FIELDS  
+
         private Database m_Database;
 
+        #endregion
 
-        //  ~  MAIN  ~  \\
+        #region MAIN
 
         [STAThread]
         public static void Main()
         {
-            //var dir = new DirectoryInfo(@"B:\Documents\Dev\Atompacman\Compost\Database");
-            //var db = Database.Load(dir);
-            Application.Run(new CompostBrowser());
-            //db.Save();
+            var browser = new CompostBrowser();
+            browser.LoadDatabase(@"B:\Documents\Dev\Atompacman\Compost\Database");
+            Application.Run(browser);
         }
 
+        #endregion
 
-        //  ~  INIT  ~  \\
+        #region INIT
 
         static CompostBrowser()
         {
             // Get columns info from annotations on Composition properties
-            s_CompoBrowserColumnsInfo = new Dictionary<PropertyInfo,
-                Composition.CompositionBrowserColumnInfoAttribute>();
+            COLUMNS_INFO = new Dictionary<PropertyInfo, ColumnInfoAttribute>();
             foreach (var property in typeof(Composition).GetRuntimeProperties())
             {
-                var info = property.GetCustomAttribute<
-                    Composition.CompositionBrowserColumnInfoAttribute>();
-                if (info != null)
+                var attr = property.GetCustomAttribute<ColumnInfoAttribute>();
+                if (attr != null)
                 {
-                    s_CompoBrowserColumnsInfo.Add(property, info);
+                    COLUMNS_INFO.Add(property, attr);
                 }
             }
         }
 
-        internal CompostBrowser()
+        private CompostBrowser()
         {
             InitializeComponent();
 
             // Create composition browser's columns
-            foreach (var property in s_CompoBrowserColumnsInfo)
+            foreach (var property in COLUMNS_INFO)
             {
                 DataGridViewColumn column;
-
                 if (property.Key.PropertyType.IsEnum)
                 {
-                    var dgvcbc = new DataGridViewComboBoxColumn();
-                    dgvcbc.DataSource = Enum.GetValues(property.Key.PropertyType);
-                    dgvcbc.ValueType = property.Key.PropertyType;
+                    var dgvcbc = new DataGridViewComboBoxColumn
+                    {
+                        DataSource = Enum.GetValues(property.Key.PropertyType),
+                        ValueType = property.Key.PropertyType
+                    };
                     column = dgvcbc;
                 }
                 else
@@ -74,10 +81,12 @@ namespace Compost.Database
                     column = new DataGridViewTextBoxColumn();
                 }
 
-                column.Name = property.Key.Name;
-                column.Width = (int)property.Value.ColumnWidth;
+                column.Name  = property.Key.Name;
+                column.Width = (int) (property.Value.RelativeColumnWidth * dataGridView1.Width);
                 dataGridView1.Columns.Add(column);
             }
+
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void LoadDatabase(string path)
@@ -86,20 +95,19 @@ namespace Compost.Database
             UpdateCompositionBrowser();
         }
 
+        #endregion
 
-        //  ~  UPDATE  ~  \\
+        #region UPDATE
 
         private void UpdateCompositionBrowser()
         {
-
-
-            for (int i = 0; i < m_Database.Compositions.Count; ++i)
+            for (var i = 0; i < m_Database.Compositions.Count; ++i)
             {
                 var composition = m_Database.Compositions[i];
                 dataGridView1.Rows.Add();
 
-                int j = 0;
-                foreach (var property in s_CompoBrowserColumnsInfo)
+                var j = 0;
+                foreach (var property in COLUMNS_INFO)
                 {
                     var a = dataGridView1.Rows[i];
                     var b = property.Key.GetGetMethod(true);
@@ -111,11 +119,8 @@ namespace Compost.Database
 
                         if (obj is List<string>)
                         {
-                            objStr = "";
-                            foreach (var item in obj as List<string>)
-                            {
-                                objStr = objStr + item.ToString() + ", ";
-                            }
+                            objStr = (obj as List<string>).Aggregate("", 
+                                (current, item) => current + item + ", ");
                             if ((obj as List<string>).Count != 0)
                             {
                                 objStr = objStr.Substring(0, objStr.Length - 2);
@@ -129,14 +134,17 @@ namespace Compost.Database
             }
         }
 
+        #endregion
 
-        //  ~  CLICK EVENTS  ~  \\
+        #region ON CLICK
 
         private void OpenDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            var dialog = new FolderBrowserDialog();
             dialog.ShowDialog();
             LoadDatabase(dialog.SelectedPath);
         }
+
+        #endregion
     }
 }

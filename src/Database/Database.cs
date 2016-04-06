@@ -4,60 +4,65 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
-using System.Xml;
 
 namespace Compost.Database
 {
     [DataContract]
     internal sealed class Database
     {
-        //  ~  CONSTANTS  ~  \\
+        #region COMPILE-TIME CONSTANTS
 
         private const string DB_FILE_NAME     = "Database.json";
         private const string ARCHIVE_DIR_NAME = "Archive";
 
+        #endregion
 
-        //  ~  STATIC FIELDS  ~  \\
+        #region RUNTIME CONSTANTS
 
-        private static DataContractJsonSerializer s_DCJS;
+        private static readonly DataContractJsonSerializer DCJS;
 
+        #endregion
 
-        //  ~  PROPERTIES  ~  \\
+        #region PUBLIC PROPERTIES
 
-        [DataMember(IsRequired = true)] internal List<Composition> Compositions   { get; set; }
-        [DataMember(IsRequired = true)] internal string            Name           { get; set; }
-        [DataMember(IsRequired = true)] internal string            FileHierarchy  { get; set; }
-        [DataMember(IsRequired = true)] internal ExtensionTable    ExtensionTable { get; set; }
+        [DataMember(IsRequired = true)] public List<Composition> Compositions   { get; set; }
+        [DataMember(IsRequired = true)] public string            Name           { get; set; }
+        [DataMember(IsRequired = true)] public string            FileHierarchy  { get; set; }
+        [DataMember(IsRequired = true)] public ExtensionTable    ExtensionTable { get; set; }
 
-        internal DirectoryInfo Root { get; set; }
+        public DirectoryInfo Root { get; set; }
 
+        #endregion
 
-        //  ~  INIT  ~  \\
+        #region INIT
 
         static Database()
         {
-            var settings = new DataContractJsonSerializerSettings();
-            settings.UseSimpleDictionaryFormat = true;
-            s_DCJS = new DataContractJsonSerializer(typeof(Database), settings);
+            var settings = new DataContractJsonSerializerSettings
+            {
+                UseSimpleDictionaryFormat = true
+            };
+            DCJS = new DataContractJsonSerializer(typeof(Database), settings);
         }
 
-        internal static Database Load(DirectoryInfo dir)
+        public static Database Load(DirectoryInfo dir)
         {
             var stream = File.OpenRead(Path.Combine(dir.FullName, DB_FILE_NAME));
-            var db = s_DCJS.ReadObject(stream) as Database;
+            var db = DCJS.ReadObject(stream) as Database;
             stream.Close();
             db.Root = dir;
             return db;
         }
 
+        #endregion
 
-        //  ~  SAVE  ~  \\
+        #region SAVE
 
-        internal void Save()
+        public void Save()
         {
             if (!Directory.Exists(Root.ToString()))
             {
-                throw new IOException("Project directory (" + Root.ToString() + " does not exist!");
+                throw new IOException("Project directory (" + Root + " does not exist!");
             }
             Save(Path.Combine(Root.ToString(), DB_FILE_NAME));
 
@@ -66,12 +71,14 @@ namespace Compost.Database
             Save(Path.Combine(archiveDir.ToString(), DateTime.Now.ToString("MM-dd-yyyy HH-mm-ss")));
         }
 
-        private void Save(string path)
+        public void Save(string path)
         {
             var stream = File.OpenWrite(path);
             var writer = JsonReaderWriterFactory.CreateJsonWriter(stream, Encoding.UTF8, true,true);
-            s_DCJS.WriteObject(writer, this);
+            DCJS.WriteObject(writer, this);
             writer.Close();
         }
+
+        #endregion
     }
 }

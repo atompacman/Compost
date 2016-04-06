@@ -1,50 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
 
 namespace Compost.Database
 {
     [DataContract]
     internal sealed class ExtensionTable
     {
-        //  ~  NESTED TYPES  ~  \\
+        #region NESTED TYPES
 
         [DataContract]
-        internal sealed class ExtensionInfo
+        public sealed class ExtensionInfo
         {
             [DataMember(IsRequired = true)] 
-            internal Composition.Resource.DocumentType DocType { get; private set; }
+            public Composition.Document.DocumentType DocType { get; private set; }
             [DataMember(IsRequired = true)]
-            internal string                            AppPath { get; private set; }
+            public string                            AppPath { get; private set; }
         }
 
+        #endregion
 
-        //  ~  FIELDS  ~  \\
+        #region PRIVATE FIELDS  
 
         [DataMember(Name = "Extensions")]
         private Dictionary<string, ExtensionInfo> m_Extensions;
 
+        #endregion
 
-        //  ~  SETTERS  ~  \\
+        #region SETTERS
 
-        internal void AddExtension(string ext, ExtensionInfo info)
+        public void AddExtension(string ext, ExtensionInfo info)
         {
             AssertExtensionDoesNotExists(ext);
             m_Extensions[ext] = info;
         }
 
-        internal void RemoveExtension(string ext)
+        public void RemoveExtension(string ext)
         {
             AssertExtensionExists(ext);
             m_Extensions.Remove(ext);
         }
 
+        #endregion
 
-        //  ~  GETTERS  ~  \\
+        #region GETTERS
 
-        internal ExtensionInfo this[string ext]
+        public ExtensionInfo this[string ext]
         {
             get
             {
@@ -52,9 +53,9 @@ namespace Compost.Database
                 return m_Extensions[ext];
             }
         }
+        #endregion
 
-
-        //  ~  UTILS  ~  \\
+        #region UTILS
 
         private void AssertExtensionExists(string ext)
         {
@@ -71,5 +72,7 @@ namespace Compost.Database
                 throw new ArgumentException("Extension \"" + ext + "\" is already registered");
             }
         }
+
+        #endregion
     }
 }

@@ -7,53 +7,59 @@ namespace Compost.Database
     [DataContract]
     internal sealed class Composition
     {
-        //  ~  NESTED TYPES  ~  \\
+        #region NESTED TYPES
 
         [DataContract]
-        internal sealed class Resource
+        public sealed class Document
         {
-            //  ~  NESTED TYPES  ~  \\
+
+            #region NESTED TYPES
 
             [DataContract]
-            internal sealed class Version
+            public sealed class Version
             {
-                //  ~  PROPERTIES  ~  \\
+                #region PUBLIC PROPERTIES
 
-                [DataMember(IsRequired = true)] internal uint     MajorVersionNumber   { get; set; }
-                [DataMember(IsRequired = true)] internal uint     MinorVersionNumber   { get; set; }
-                [DataMember(IsRequired = true)] internal DateTime CreationDate         { get; set; }
-                [DataMember(IsRequired = true)] internal DateTime LastModificationDate { get; set; }
-                [DataMember(IsRequired = true)] internal string   Description          { get; set; }
+                [DataMember(IsRequired = true)] public uint     MajorVersionNumber   { get; set; }
+                [DataMember(IsRequired = true)] public uint     MinorVersionNumber   { get; set; }
+                [DataMember(IsRequired = true)] public DateTime CreationDate         { get; set; }
+                [DataMember(IsRequired = true)] public DateTime LastModificationDate { get; set; }
+                [DataMember(IsRequired = true)] public string   Description          { get; set; }
+
+                #endregion
             }
 
-            internal enum DocumentType
+            public enum DocumentType
             {
-                SOFTWARE_PARTITION,
-                SHEET_PARTITION,
-                AUDIO_FILE,
-                ARTWORK,
-                LYRICS,
-                OTHER
+                SoftwarePartition,
+                SheetPartition,
+                AudioFile,
+                Artwork,
+                Lyrics,
+                Other
             }
 
+            #endregion
 
-            //  ~  PROPERTIES  ~  \\
+            #region PUBLIC PROPERTIES
 
-            [DataMember(IsRequired = true)] internal List<Version> Versions    { get; set; }
-            [DataMember(IsRequired = true)] internal string        Name        { get; set; }
-            [DataMember(IsRequired = true)] internal DocumentType  DocType     { get; set; }
-            [DataMember(IsRequired = true)] internal string        Description { get; set; }
+            [DataMember(IsRequired = true)] public List<Version> Versions    { get; set; }
+            [DataMember(IsRequired = true)] public string        Name        { get; set; }
+            [DataMember(IsRequired = true)] public DocumentType  DocType     { get; set; }
+            [DataMember(IsRequired = true)] public string        Description { get; set; }
+
+            #endregion
         }
 
-        internal enum AttributionType
+        public enum AttributionType
         {
             Original,
             Arrangement,
-            By_Others,
+            ByOthers,
             Collaboration,
         }
 
-        internal enum Tier
+        public enum Tier
         {
             Stone,
             Bronze,
@@ -62,46 +68,43 @@ namespace Compost.Database
             Diamond
         }
 
-        [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-        internal sealed class CompositionBrowserColumnInfoAttribute : Attribute
-        {
-            public uint ColumnWidth { get; set; }
-        }
+        #endregion
 
-
-        //  ~  PROPERTIES  ~  \\
+        #region PUBLIC PROPERTIES
 
         [DataMember(IsRequired = true)]
-        internal List<Resource> Resources { get; set; }
+        public List<Document> Resources { get; set; }
 
-        [DataMember(IsRequired = true), CompositionBrowserColumnInfo(ColumnWidth = 100)]
-        internal AttributionType Attribution { get; set; }
+        [DataMember(IsRequired = true), CompostBrowser.ColumnInfo(RelativeColumnWidth = 0.1)]
+        public AttributionType Attribution { get; set; }
 
-        [DataMember(IsRequired = true), CompositionBrowserColumnInfo(ColumnWidth = 477)]
-        internal List<string> Authors { get; set; }
+        [DataMember(IsRequired = true), CompostBrowser.ColumnInfo(RelativeColumnWidth = 0.1)]
+        public List<string> Authors { get; set; }
 
-        [DataMember(IsRequired = true), CompositionBrowserColumnInfo(ColumnWidth = 100)]
-        internal string Era { get; set; }
+        [DataMember(IsRequired = true), CompostBrowser.ColumnInfo(RelativeColumnWidth = 0.1)]
+        public string Era { get; set; }
 
-        [DataMember(IsRequired = true), CompositionBrowserColumnInfo(ColumnWidth = 60)]
-        internal string Genre { get; set; }
+        [DataMember(IsRequired = true), CompostBrowser.ColumnInfo(RelativeColumnWidth = 0.1)]
+        public string Genre { get; set; }
 
-        [DataMember(IsRequired = true), CompositionBrowserColumnInfo(ColumnWidth = 300)]
-        internal string Subgenre { get; set; }
+        [DataMember(IsRequired = true), CompostBrowser.ColumnInfo(RelativeColumnWidth = 0.1)]
+        public string Subgenre { get; set; }
 
-        [DataMember(IsRequired = true), CompositionBrowserColumnInfo(ColumnWidth = 100)]
-        internal string Title { get; set; }
+        [DataMember(IsRequired = true), CompostBrowser.ColumnInfo(RelativeColumnWidth = 0.1)]
+        public string Title { get; set; }
 
-        [DataMember(IsRequired = true), CompositionBrowserColumnInfo(ColumnWidth = 100)]
-        internal string SetTitle { get; set; }
+        [DataMember(IsRequired = true), CompostBrowser.ColumnInfo(RelativeColumnWidth = 0.1)]
+        public string SetTitle { get; set; }
 
-        [DataMember(IsRequired = true), CompositionBrowserColumnInfo(ColumnWidth = 80)]
-        internal Tier QualityTier { get; set; }
+        [DataMember(IsRequired = true), CompostBrowser.ColumnInfo(RelativeColumnWidth = 0.1)]
+        public Tier QualityTier { get; set; }
 
-        [DataMember(IsRequired = true), CompositionBrowserColumnInfo(ColumnWidth = 100)]
-        internal List<string> Instruments { get; set; }
+        [DataMember(IsRequired = true), CompostBrowser.ColumnInfo(RelativeColumnWidth = 0.1)]
+        public List<string> Instruments { get; set; }
 
-        [DataMember(IsRequired = true), CompositionBrowserColumnInfo(ColumnWidth = 100)]
-        internal string Description { get; set; }
+        [DataMember(IsRequired = true), CompostBrowser.ColumnInfo(RelativeColumnWidth = 0.1)]
+        public string Description { get; set; }
+
+        #endregion
     }
 }
