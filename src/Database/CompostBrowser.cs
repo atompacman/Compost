@@ -20,8 +20,8 @@ namespace Compost.Database
         [STAThread]
         public static void Main()
         {
-            var browser = new CompostBrowser();
-            browser.LoadDatabase(@"C:\Users\Utilisateur\Dev\MSVC\C#\Compost\Database");
+            var browser = new MultiFileCompositionImporter();// CompostBrowser();
+            //browser.LoadDatabase(@"C:\Users\Utilisateur\Dev\MSVC\C#\Compost\Database");
             Application.Run(browser);
         }
 
