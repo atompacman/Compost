@@ -1,7 +1,6 @@
 {
   "Compositions": [
     {
-      "Attribution": 2,
       "Authors": [
         "Moi",
         "Toi"
@@ -34,7 +33,6 @@
       "Title": "Castle Theme"
     },
 	{
-      "Attribution": 1,
       "Authors": [
         "Eux"
       ],

@@ -28,18 +28,6 @@ namespace FXGuild.Compost
     {
         #region Nested types
 
-        public enum AttributionType
-        {
-            ORIGINAL,
-            ARRANGEMENT,
-            BY_OTHERS,
-            COLLABORATION
-        }
-
-        #endregion
-
-        #region Nested types
-
         [DataContract]
         public sealed class Document
         {
@@ -120,9 +108,6 @@ namespace FXGuild.Compost
 
         [DataMember(IsRequired = true)]
         public List<Document> Documents { get; set; }
-
-        [DataMember(IsRequired = true), ColumnInfo(RelativeColumnWidth = 0.6)]
-        public AttributionType Attribution { get; set; }
 
         [DataMember(IsRequired = true), ColumnInfo(RelativeColumnWidth = 1.0)]
         public List<string> Authors { get; set; }
