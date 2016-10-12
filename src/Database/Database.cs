@@ -1,3 +1,22 @@
+// MIT License
+//
+// Copyright (c) 2016 FXGuild
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+// associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+// NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -5,36 +24,44 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.Text;
 
-namespace Compost.Database
+namespace FXGuild.Compost
 {
     [DataContract]
     internal sealed class Database
     {
-        #region COMPILE-TIME CONSTANTS
+        #region Compile-time constants
 
-        private const string DB_FILE_NAME     = "Database.json";
+        private const string DB_FILE_NAME = "Database.json";
         private const string ARCHIVE_DIR_NAME = "Archive";
+        private const string ARCHIVE_FILE_TIMESTAMP_PATTERN = "MM-dd-yyyy HH-mm-ss";
 
         #endregion
 
-        #region RUNTIME CONSTANTS
+        #region Runtime constants
 
         private static readonly DataContractJsonSerializer DCJS;
 
         #endregion
 
-        #region PUBLIC PROPERTIES
+        #region Properties
 
-        [DataMember(IsRequired = true)] public List<Composition> Compositions   { get; set; }
-        [DataMember(IsRequired = true)] public string            Name           { get; set; }
-        [DataMember(IsRequired = true)] public string            FileHierarchy  { get; set; }
-        [DataMember(IsRequired = true)] public ExtensionTable    ExtensionTable { get; set; }
+        [DataMember(IsRequired = true)]
+        public List<Composition> Compositions { get; set; }
+
+        [DataMember(IsRequired = true)]
+        public string Name { get; set; }
+
+        [DataMember(IsRequired = true)]
+        public string FileHierarchy { get; set; }
+
+        [DataMember(IsRequired = true)]
+        public ExtensionTable ExtensionTable { get; set; }
 
         public DirectoryInfo Root { get; set; }
 
         #endregion
 
-        #region INIT
+        #region Constructors
 
         static Database()
         {
@@ -45,18 +72,22 @@ namespace Compost.Database
             DCJS = new DataContractJsonSerializer(typeof(Database), settings);
         }
 
-        public static Database Load(DirectoryInfo dir)
+        #endregion
+
+        #region Static methods
+
+        public static Database Load(DirectoryInfo a_Dir)
         {
-            var stream = File.OpenRead(Path.Combine(dir.FullName, DB_FILE_NAME));
-            var db = DCJS.ReadObject(stream) as Database;
+            var stream = File.OpenRead(Path.Combine(a_Dir.FullName, DB_FILE_NAME));
+            var db = (Database) DCJS.ReadObject(stream);
             stream.Close();
-            db.Root = dir;
+            db.Root = a_Dir;
             return db;
         }
 
         #endregion
 
-        #region SAVE
+        #region Methods
 
         public void Save()
         {
@@ -68,13 +99,15 @@ namespace Compost.Database
 
             var archiveDir = new DirectoryInfo(Path.Combine(Root.ToString(), ARCHIVE_DIR_NAME));
             archiveDir.Create();
-            Save(Path.Combine(archiveDir.ToString(), DateTime.Now.ToString("MM-dd-yyyy HH-mm-ss")));
+            Save(Path.Combine(archiveDir.ToString(),
+                DateTime.Now.ToString(ARCHIVE_FILE_TIMESTAMP_PATTERN)));
         }
 
-        public void Save(string path)
+        public void Save(string a_Path)
         {
-            var stream = File.OpenWrite(path);
-            var writer = JsonReaderWriterFactory.CreateJsonWriter(stream, Encoding.UTF8, true,true);
+            var stream = File.OpenWrite(a_Path);
+            var writer = JsonReaderWriterFactory.CreateJsonWriter(stream, Encoding.UTF8, true,
+                true);
             DCJS.WriteObject(writer, this);
             writer.Close();
         }

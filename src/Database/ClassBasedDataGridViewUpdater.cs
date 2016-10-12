@@ -1,25 +1,51 @@
-﻿using System;
+﻿// MIT License
+//
+// Copyright (c) 2016 FXGuild
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+// associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+// NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace Compost.Database
-{
-    [AttributeUsage(AttributeTargets.Property)]
-    internal sealed class ColumnInfoAttribute : Attribute
-    {
-        public double RelativeColumnWidth { get; set; }
-    }
+// ReSharper disable StaticMemberInGenericType
 
+namespace FXGuild.Compost
+{
+    /// <summary>
+    /// Helper class that initializes and update DataGridViews to contain elements of type T with
+    /// its columns being properties of T marked by the ColumnInfo attribute.
+    /// </summary>
+    /// <typeparam name="T">Type of objects in the grid</typeparam>
     internal static class ClassBasedDataGridViewUpdater<T>
     {
+        #region Runtime constants
+
         private static readonly Dictionary<PropertyInfo, ColumnInfoAttribute> COLUMNS_INFO;
         private static readonly double RELATIVE_COLUMN_WIDTHS_SUM;
 
+        #endregion
+
+        #region Constructors
+
         static ClassBasedDataGridViewUpdater()
         {
-            // Save class T properties that have a ColumnInfoAttribute
+            // Save class T properties that have a ColumnInfo attribute
             COLUMNS_INFO = new Dictionary<PropertyInfo, ColumnInfoAttribute>();
             RELATIVE_COLUMN_WIDTHS_SUM = 0;
             foreach (var property in typeof(T).GetRuntimeProperties())
@@ -32,7 +58,11 @@ namespace Compost.Database
                 }
             }
         }
-        
+
+        #endregion
+
+        #region Static methods
+
         public static void CreateColumns(DataGridView a_DataGridView)
         {
             // Clear existing columns
@@ -59,13 +89,12 @@ namespace Compost.Database
                     column = new DataGridViewTextBoxColumn();
                 }
 
-                column.Name  = property.Key.Name;
-                column.Width = (int)(a_DataGridView.Width * 
-                    (property.Value.RelativeColumnWidth / RELATIVE_COLUMN_WIDTHS_SUM));
+                column.Name = property.Key.Name;
+                column.Width = (int) (a_DataGridView.Width *
+                                      (property.Value.RelativeColumnWidth /
+                                       RELATIVE_COLUMN_WIDTHS_SUM));
                 a_DataGridView.Columns.Add(column);
             }
-
-           // a_DataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         public static void Update(DataGridView a_DataGridView, List<T> a_Elements)
@@ -73,25 +102,32 @@ namespace Compost.Database
             // Clear previous rows
             a_DataGridView.Rows.Clear();
 
+            // For each element
             for (int i = 0; i < a_Elements.Count; ++i)
             {
+                // Add row for this element
                 a_DataGridView.Rows.Add();
 
-                var j = 0;
+                // For each element property
+                int j = 0;
                 foreach (var property in COLUMNS_INFO)
                 {
                     var a = a_DataGridView.Rows[i];
+
+                    // Call the getter to get the value
                     var b = property.Key.GetGetMethod(true);
                     var obj = b.Invoke(a_Elements[i], new object[0]);
 
+                    // Non enum values need toString conversion
                     if (!property.Key.PropertyType.IsEnum)
                     {
-                        var objStr = obj.ToString();
+                        string objStr = obj.ToString();
 
+                        // Concatenate list of strings into a single string
                         if (obj is List<string>)
                         {
                             objStr = (obj as List<string>).Aggregate("",
-                                (current, item) => current + item + ", ");
+                                (a_Current, a_Item) => a_Current + a_Item + ", ");
                             if ((obj as List<string>).Count != 0)
                             {
                                 objStr = objStr.Substring(0, objStr.Length - 2);
@@ -104,5 +140,17 @@ namespace Compost.Database
                 }
             }
         }
+
+        #endregion
+    }
+
+    [AttributeUsage(AttributeTargets.Property)]
+    internal sealed class ColumnInfoAttribute : Attribute
+    {
+        #region Properties
+
+        public double RelativeColumnWidth { get; set; }
+
+        #endregion
     }
 }

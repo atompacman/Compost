@@ -1,4 +1,4 @@
-﻿namespace Compost.Database
+﻿namespace FXGuild.Compost
 {
     partial class MultiFileCompositionImporter
     {

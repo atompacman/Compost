@@ -1,6 +1,6 @@
-﻿namespace Compost.Database
+﻿namespace FXGuild.Compost
 {
-    partial class CompostBrowser
+    internal partial class CompostBrowser
     {
         /// <summary>
         /// Required designer variable.
