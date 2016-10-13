@@ -21,27 +21,57 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Json;
+using System.Text;
 using System.Windows.Forms;
 
 namespace FXGuild.Compost
 {
     internal partial class CompostBrowser : Form
     {
+        #region Compile-time constants
+
+        private const string ARCHIVE_DIR_PREFIX = "Archive";
+        private const string ARCHIVE_FILE_TIMESTAMP_PATTERN = "MM-dd-yyyy HH-mm-ss";
+
+        #endregion
+
+        #region Runtime constants
+
+        private static readonly DataContractJsonSerializer DCJS;
+
+        #endregion
+
         #region Private fields
 
         private bool m_HasUnsavedChanges;
+        private string m_DbFilePath;
         private Database m_Database;
 
         #endregion
 
         #region Constructors
 
+        static CompostBrowser()
+        {
+            // Create json database parser
+            var settings = new DataContractJsonSerializerSettings
+            {
+                UseSimpleDictionaryFormat = true
+            };
+            DCJS = new DataContractJsonSerializer(typeof(Database), settings);
+        }
+
         private CompostBrowser()
         {
+            // Build win form
             InitializeComponent();
 
-            ClassBasedDataGridViewUpdater<Composition>.CreateColumns(CompositionBrowser);
-            ClassBasedDataGridViewUpdater<Composition.Document>.CreateColumns(DocumentBrowser);
+            // Initialize browsers
+            ClassBasedDataGridViewUpdater<Composition>.CreateColumns(
+                CompositionBrowser);
+            ClassBasedDataGridViewUpdater<Composition.Document>.CreateColumns(
+                DocumentBrowser);
             ClassBasedDataGridViewUpdater<Composition.Document.Version>.CreateColumns(
                 VersionBrowser);
 
@@ -53,10 +83,18 @@ namespace FXGuild.Compost
         #region Static methods
 
         [STAThread]
-        public static void Main()
+        public static void Main(string[] a_Args)
         {
+            // Create main window
             var browser = new CompostBrowser();
-            browser.LoadDatabase(@"B:\Documents\Dev\Atompacman\Compost\Database");
+
+            // Load database if a path is provided
+            if (a_Args.Length > 0)
+            {
+                browser.LoadDatabase(a_Args[0]);
+            }
+
+            // Run app on main thread
             Application.Run(browser);
         }
 
@@ -64,28 +102,38 @@ namespace FXGuild.Compost
 
         #region Methods
 
+        private void LoadDatabase(string a_Path)
+        {
+            m_HasUnsavedChanges = false;
+
+            // Parse json database file
+            m_DbFilePath = a_Path;
+            using (var stream = File.OpenRead(a_Path))
+            {
+                m_Database = (Database) DCJS.ReadObject(stream);
+            }
+
+            // Update composition browser
+            ClassBasedDataGridViewUpdater<Composition>.UpdateView(
+                CompositionBrowser, m_Database.Compositions);
+        }
+
+        /// <returns>False if the save was canceled, true otherwise</returns>
         private bool AskToSaveChanges()
         {
             if (!m_HasUnsavedChanges)
             {
+                // Nothing to save
                 return true;
             }
 
             switch (MessageBox.Show("Save database ?", "Save", MessageBoxButtons.YesNoCancel))
             {
-            case DialogResult.Cancel:
-            case DialogResult.None:
-            case DialogResult.Abort:
-            case DialogResult.Retry:
-            case DialogResult.Ignore:
-                return false;
-
-            case DialogResult.No:
-            case DialogResult.OK:
-                return true;
-
             case DialogResult.Yes:
                 SaveDatabase();
+                return true;
+
+            case DialogResult.No:
                 return true;
 
             default:
@@ -106,25 +154,47 @@ namespace FXGuild.Compost
 
         private void SaveDatabase()
         {
-            m_Database.Save();
-
             if (!m_HasUnsavedChanges)
             {
+                // Nothing to save
                 return;
             }
+
+            // Create archive directory if needed
+            string archiveDirName = ARCHIVE_DIR_PREFIX + '_' + m_Database.Name;
+            string archiveDirPath = Path.Combine(Directory.GetCurrentDirectory(), archiveDirName);
+            if (!Directory.Exists(archiveDirPath))
+            {
+                Directory.CreateDirectory(archiveDirPath);
+            }
+
+            // Save a copy of the database in the archive directory
+            string timestamp = DateTime.Now.ToString(ARCHIVE_FILE_TIMESTAMP_PATTERN);
+            SaveCopy(Path.Combine(archiveDirPath, timestamp));
+
+            // Overwrite current copy of the database
+            SaveCopy(m_DbFilePath);
 
             m_HasUnsavedChanges = false;
             Text = Text.Replace("*", "");
         }
 
-        private void LoadDatabase(string a_Path)
+        private void SaveCopy(string a_Path)
         {
-            m_Database = Database.Load(new DirectoryInfo(a_Path));
-            ClassBasedDataGridViewUpdater<Composition>.UpdateView(CompositionBrowser,
-                m_Database.Compositions);
+            using (var stream = File.OpenWrite(a_Path))
+            {
+                using (var writer = JsonReaderWriterFactory.CreateJsonWriter(
+                    stream, Encoding.UTF8, true, true))
+                {
+                    DCJS.WriteObject(writer, m_Database);
+                }
+            }
         }
-        
-        private void EditCell<T>(DataGridView a_Dgv, int a_RowIdx, int a_ColumnIdx, List<T> a_Elements)
+
+        private void EditCell<T>(DataGridView a_Dgv,
+                                 int a_RowIdx,
+                                 int a_ColumnIdx,
+                                 IReadOnlyList<T> a_Elements)
         {
             // Get the reflected property that was edited
             var property = ClassBasedDataGridViewUpdater<T>.GetColumnProperty(a_ColumnIdx);
@@ -165,11 +235,15 @@ namespace FXGuild.Compost
 
         private Composition GetSelectedComposition()
         {
+            if (CompositionBrowser.CurrentCell == null)
+            {
+                return null;
+            }
             int idx = CompositionBrowser.CurrentCell.RowIndex;
             return idx < m_Database.Compositions.Count ? m_Database.Compositions[idx] : null;
         }
 
-        private Composition.Document GetSelecteDocument()
+        private Composition.Document GetSelectedDocument()
         {
             var compo = GetSelectedComposition();
             if (compo == null)
@@ -191,11 +265,13 @@ namespace FXGuild.Compost
                 return;
 
             case "DocumentBrowser":
-                EditCell(dgv, a_Args.RowIndex, a_Args.ColumnIndex, GetSelectedComposition().Documents);
+                EditCell(dgv, a_Args.RowIndex, a_Args.ColumnIndex,
+                    GetSelectedComposition().Documents);
                 return;
 
             default:
-                EditCell(dgv, a_Args.RowIndex, a_Args.ColumnIndex, GetSelecteDocument().Versions);
+                EditCell(dgv, a_Args.RowIndex, a_Args.ColumnIndex,
+                    GetSelectedDocument().Versions);
                 return;
             }
         }
@@ -254,15 +330,15 @@ namespace FXGuild.Compost
             ClassBasedDataGridViewUpdater<Composition.Document>.UpdateView(DocumentBrowser, docs);
 
             // UpdateView version table
-            var vers = docs[0].Versions;
             ClassBasedDataGridViewUpdater<Composition.Document.Version>.UpdateView(
                 VersionBrowser,
-                vers);
+                docs[0].Versions);
         }
 
         private void OnDocumentBrowserRowEnter(object a_Sender, DataGridViewCellEventArgs a_E)
         {
-            if (CompositionBrowser.CurrentCell == null)
+            var compo = GetSelectedComposition();
+            if (compo == null)
             {
                 return;
             }

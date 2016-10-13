@@ -3,7 +3,8 @@
     {
       "Authors": [
         "Moi",
-        "Toi"
+        "Toi",
+        "koku"
       ],
       "Description": "Tout premier fichier GP5 enregistré (non-modifié)",
       "Documents": [
@@ -14,7 +15,7 @@
           "Versions": [
             {
               "CreationDate": "\/Date(1335205592410)\/",
-              "Description": "ADIBOU",
+              "Description": "ADIBOUx",
               "LastModificationDate": "\/Date(1332205592410)\/",
               "MajorVersionNumber": 1,
               "MinorVersionNumber": 4
@@ -36,7 +37,7 @@
       "Authors": [
         "Eux"
       ],
-      "Description": "Du stock pertinant",
+      "Description": "Du stock pertinanto",
       "Documents": [
         {
           "Description": "Super meat ballz 1",
@@ -72,7 +73,7 @@
       "Instruments": [
         "Bass"
       ],
-      "QualityTier": 3,
+      "QualityTier": 0,
       "SetTitle": "Super Mario World",
       "Subgenre": "SNES",
       "Title": "Castle Themezzz"
