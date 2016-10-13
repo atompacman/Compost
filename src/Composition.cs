@@ -33,7 +33,7 @@ namespace FXGuild.Compost
         {
             #region Nested types
 
-            public enum DocumentType
+            public enum Type
             {
                 SOFTWARE_PARTITION,
                 SHEET_PARTITION,
@@ -81,7 +81,7 @@ namespace FXGuild.Compost
             public string Name { get; set; }
 
             [DataMember(IsRequired = true), ColumnInfo(RelativeColumnWidth = 0.3)]
-            public DocumentType DocType { get; set; }
+            public Type DocType { get; set; }
 
             [DataMember(IsRequired = true), ColumnInfo(RelativeColumnWidth = 2.0)]
             public string Description { get; set; }

@@ -6,12 +6,6 @@
         "Toi"
       ],
       "Description": "Tout premier fichier GP5 enregistré (non-modifié)",
-      "Era": "Yolo",
-      "Genre": "VGM",
-      "Instruments": [
-        "Chiptune"
-      ],
-      "QualityTier": 1,
       "Documents": [
         {
           "Description": "Super meat ballz",
@@ -28,21 +22,21 @@
           ]
         }
       ],
+      "Era": "Yolo",
+      "Genre": "VGM",
+      "Instruments": [
+        "Chiptune"
+      ],
+      "QualityTier": 1,
       "SetTitle": "Super Mario World",
       "Subgenre": "SNES",
       "Title": "Castle Theme"
     },
-	{
+    {
       "Authors": [
         "Eux"
       ],
       "Description": "Du stock pertinant",
-      "Era": "Cayo",
-      "Genre": "Metal",
-      "Instruments": [
-        "Bass"
-      ],
-      "QualityTier": 3,
       "Documents": [
         {
           "Description": "Super meat ballz 1",
@@ -58,7 +52,7 @@
             }
           ]
         },
-		{
+        {
           "Description": "Super meat ballz 2",
           "DocType": 3,
           "Name": "Da ass Partition",
@@ -73,9 +67,15 @@
           ]
         }
       ],
+      "Era": "Cayo",
+      "Genre": "Metal",
+      "Instruments": [
+        "Bass"
+      ],
+      "QualityTier": 3,
       "SetTitle": "Super Mario World",
       "Subgenre": "SNES",
-      "Title": "Castle Theme"
+      "Title": "Castle Themezzz"
     }
   ],
   "ExtensionTable": {

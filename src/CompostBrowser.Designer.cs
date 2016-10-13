@@ -29,38 +29,43 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CompostBrowser));
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.CompositionBrowser = new System.Windows.Forms.DataGridView();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.DocumentBrowser = new System.Windows.Forms.DataGridView();
+            this.VersionBrowser = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.CompositionBrowser)).BeginInit();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DocumentBrowser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.VersionBrowser)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // CompositionBrowser
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 57);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView1.Size = new System.Drawing.Size(1560, 372);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowEnter);
+            this.CompositionBrowser.AllowUserToAddRows = false;
+            this.CompositionBrowser.AllowUserToDeleteRows = false;
+            this.CompositionBrowser.AllowUserToOrderColumns = true;
+            this.CompositionBrowser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.CompositionBrowser.Location = new System.Drawing.Point(12, 57);
+            this.CompositionBrowser.MultiSelect = false;
+            this.CompositionBrowser.Name = "CompositionBrowser";
+            this.CompositionBrowser.RowHeadersVisible = false;
+            this.CompositionBrowser.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.CompositionBrowser.Size = new System.Drawing.Size(1560, 372);
+            this.CompositionBrowser.TabIndex = 0;
+            this.CompositionBrowser.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellEdited);
+            this.CompositionBrowser.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCompositionBrowserRowEnter);
             // 
             // toolStripContainer1
             // 
@@ -86,14 +91,17 @@
             this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(-5, -1);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(84, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(176, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openDatabaseToolStripMenuItem});
+            this.openDatabaseToolStripMenuItem,
+            this.saveDatabaseToolStripMenuItem,
+            this.closeDatabaseToolStripMenuItem,
+            this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -104,7 +112,28 @@
             this.openDatabaseToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.openDatabaseToolStripMenuItem.Text = "Open database...";
             this.openDatabaseToolStripMenuItem.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.openDatabaseToolStripMenuItem.Click += new System.EventHandler(this.OpenDatabaseToolStripMenuItem_Click);
+            this.openDatabaseToolStripMenuItem.Click += new System.EventHandler(this.OnFileToolbarOpenDatabase);
+            // 
+            // saveDatabaseToolStripMenuItem
+            // 
+            this.saveDatabaseToolStripMenuItem.Name = "saveDatabaseToolStripMenuItem";
+            this.saveDatabaseToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.saveDatabaseToolStripMenuItem.Text = "Save database";
+            this.saveDatabaseToolStripMenuItem.Click += new System.EventHandler(this.OnFileToolbarSaveDatabase);
+            // 
+            // closeDatabaseToolStripMenuItem
+            // 
+            this.closeDatabaseToolStripMenuItem.Name = "closeDatabaseToolStripMenuItem";
+            this.closeDatabaseToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.closeDatabaseToolStripMenuItem.Text = "Close database";
+            this.closeDatabaseToolStripMenuItem.Click += new System.EventHandler(this.OnFileToolbarCloseDatabase);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.OnFileToolbarExit);
             // 
             // editToolStripMenuItem
             // 
@@ -132,45 +161,50 @@
             this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton1.Text = "toolStripButton1";
             // 
-            // dataGridView2
+            // DocumentBrowser
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.AllowUserToOrderColumns = true;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(12, 437);
-            this.dataGridView2.MultiSelect = false;
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView2.Size = new System.Drawing.Size(794, 315);
-            this.dataGridView2.TabIndex = 2;
-            this.dataGridView2.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_RowEnter);
+            this.DocumentBrowser.AllowUserToAddRows = false;
+            this.DocumentBrowser.AllowUserToDeleteRows = false;
+            this.DocumentBrowser.AllowUserToOrderColumns = true;
+            this.DocumentBrowser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DocumentBrowser.Location = new System.Drawing.Point(12, 437);
+            this.DocumentBrowser.MultiSelect = false;
+            this.DocumentBrowser.Name = "DocumentBrowser";
+            this.DocumentBrowser.RowHeadersVisible = false;
+            this.DocumentBrowser.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.DocumentBrowser.Size = new System.Drawing.Size(794, 315);
+            this.DocumentBrowser.TabIndex = 2;
+            this.DocumentBrowser.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellEdited);
+            this.DocumentBrowser.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnDocumentBrowserRowEnter);
             // 
-            // dataGridView3
+            // VersionBrowser
             // 
-            this.dataGridView3.AllowUserToAddRows = false;
-            this.dataGridView3.AllowUserToDeleteRows = false;
-            this.dataGridView3.AllowUserToOrderColumns = true;
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Location = new System.Drawing.Point(812, 437);
-            this.dataGridView3.MultiSelect = false;
-            this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView3.Size = new System.Drawing.Size(760, 315);
-            this.dataGridView3.TabIndex = 3;
+            this.VersionBrowser.AllowUserToAddRows = false;
+            this.VersionBrowser.AllowUserToDeleteRows = false;
+            this.VersionBrowser.AllowUserToOrderColumns = true;
+            this.VersionBrowser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.VersionBrowser.Location = new System.Drawing.Point(812, 437);
+            this.VersionBrowser.MultiSelect = false;
+            this.VersionBrowser.Name = "VersionBrowser";
+            this.VersionBrowser.RowHeadersVisible = false;
+            this.VersionBrowser.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.VersionBrowser.Size = new System.Drawing.Size(760, 315);
+            this.VersionBrowser.TabIndex = 3;
+            this.VersionBrowser.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellEdited);
             // 
             // CompostBrowser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1584, 762);
-            this.Controls.Add(this.dataGridView3);
-            this.Controls.Add(this.dataGridView2);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.VersionBrowser);
+            this.Controls.Add(this.DocumentBrowser);
+            this.Controls.Add(this.CompositionBrowser);
             this.Controls.Add(this.toolStripContainer1);
             this.Name = "CompostBrowser";
             this.Text = "CompostBrowser";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnExit);
+            ((System.ComponentModel.ISupportInitialize)(this.CompositionBrowser)).EndInit();
             this.toolStripContainer1.ContentPanel.ResumeLayout(false);
             this.toolStripContainer1.ContentPanel.PerformLayout();
             this.toolStripContainer1.ResumeLayout(false);
@@ -179,15 +213,15 @@
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DocumentBrowser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.VersionBrowser)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView CompositionBrowser;
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
@@ -195,7 +229,10 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openDatabaseToolStripMenuItem;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.DataGridView DocumentBrowser;
+        private System.Windows.Forms.DataGridView VersionBrowser;
+        private System.Windows.Forms.ToolStripMenuItem saveDatabaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem closeDatabaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
 }

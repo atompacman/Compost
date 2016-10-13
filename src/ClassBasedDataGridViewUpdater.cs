@@ -36,7 +36,7 @@ namespace FXGuild.Compost
     {
         #region Runtime constants
 
-        private static readonly Dictionary<PropertyInfo, ColumnInfoAttribute> COLUMNS_INFO;
+        private static readonly List<Tuple<PropertyInfo, ColumnInfoAttribute>> COLUMNS_INFO;
         private static readonly double RELATIVE_COLUMN_WIDTHS_SUM;
 
         #endregion
@@ -46,16 +46,17 @@ namespace FXGuild.Compost
         static ClassBasedDataGridViewUpdater()
         {
             // Save class T properties that have a ColumnInfo attribute
-            COLUMNS_INFO = new Dictionary<PropertyInfo, ColumnInfoAttribute>();
+            COLUMNS_INFO = new List<Tuple<PropertyInfo, ColumnInfoAttribute>>();
             RELATIVE_COLUMN_WIDTHS_SUM = 0;
             foreach (var property in typeof(T).GetRuntimeProperties())
             {
                 var attr = property.GetCustomAttribute<ColumnInfoAttribute>();
-                if (attr != null)
+                if (attr == null)
                 {
-                    COLUMNS_INFO.Add(property, attr);
-                    RELATIVE_COLUMN_WIDTHS_SUM += attr.RelativeColumnWidth;
+                    continue;
                 }
+                COLUMNS_INFO.Add(new Tuple<PropertyInfo, ColumnInfoAttribute>(property, attr));
+                RELATIVE_COLUMN_WIDTHS_SUM += attr.RelativeColumnWidth;
             }
         }
 
@@ -74,12 +75,12 @@ namespace FXGuild.Compost
                 DataGridViewColumn column;
 
                 // Enum properties
-                if (property.Key.PropertyType.IsEnum)
+                if (property.Item1.PropertyType.IsEnum)
                 {
                     var dgvcbc = new DataGridViewComboBoxColumn
                     {
-                        DataSource = Enum.GetValues(property.Key.PropertyType),
-                        ValueType = property.Key.PropertyType
+                        DataSource = Enum.GetValues(property.Item1.PropertyType),
+                        ValueType = property.Item1.PropertyType
                     };
                     column = dgvcbc;
                 }
@@ -89,15 +90,15 @@ namespace FXGuild.Compost
                     column = new DataGridViewTextBoxColumn();
                 }
 
-                column.Name = property.Key.Name;
+                column.Name = property.Item1.Name;
                 column.Width = (int) (a_DataGridView.Width *
-                                      (property.Value.RelativeColumnWidth /
+                                      (property.Item2.RelativeColumnWidth /
                                        RELATIVE_COLUMN_WIDTHS_SUM));
                 a_DataGridView.Columns.Add(column);
             }
         }
 
-        public static void Update(DataGridView a_DataGridView, List<T> a_Elements)
+        public static void UpdateView(DataGridView a_DataGridView, List<T> a_Elements)
         {
             // Clear previous rows
             a_DataGridView.Rows.Clear();
@@ -115,11 +116,11 @@ namespace FXGuild.Compost
                     var a = a_DataGridView.Rows[i];
 
                     // Call the getter to get the value
-                    var b = property.Key.GetGetMethod(true);
+                    var b = property.Item1.GetGetMethod(true);
                     var obj = b.Invoke(a_Elements[i], new object[0]);
 
                     // Non enum values need toString conversion
-                    if (!property.Key.PropertyType.IsEnum)
+                    if (!property.Item1.PropertyType.IsEnum)
                     {
                         string objStr = obj.ToString();
 
@@ -139,6 +140,11 @@ namespace FXGuild.Compost
                     a.Cells[j++].Value = obj;
                 }
             }
+        }
+
+        public static PropertyInfo GetColumnProperty(int a_ColumnIdx)
+        {
+            return COLUMNS_INFO[a_ColumnIdx].Item1;
         }
 
         #endregion

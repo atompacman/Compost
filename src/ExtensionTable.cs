@@ -34,7 +34,7 @@ namespace FXGuild.Compost
             #region Properties
 
             [DataMember(IsRequired = true)]
-            public Composition.Document.DocumentType DocType { get; private set; }
+            public Composition.Document.Type DocType { get; private set; }
 
             [DataMember(IsRequired = true)]
             public string AppPath { get; private set; }
