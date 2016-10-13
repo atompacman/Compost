@@ -96,6 +96,10 @@ namespace FXGuild.Compost
                                        RELATIVE_COLUMN_WIDTHS_SUM));
                 a_DataGridView.Columns.Add(column);
             }
+
+            // Last column fills the rest of the table
+            var last = a_DataGridView.Columns[a_DataGridView.Columns.Count - 1];
+            last.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         public static void UpdateView(DataGridView a_DataGridView, List<T> a_Elements)

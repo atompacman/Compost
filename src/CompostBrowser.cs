@@ -85,15 +85,17 @@ namespace FXGuild.Compost
         [STAThread]
         public static void Main(string[] a_Args)
         {
+            //var browser = new MultiFileCompositionImporter();
+
             // Create main window
             var browser = new CompostBrowser();
-
+            
             // Load database if a path is provided
             if (a_Args.Length > 0)
             {
                 browser.LoadDatabase(a_Args[0]);
             }
-
+            
             // Run app on main thread
             Application.Run(browser);
         }

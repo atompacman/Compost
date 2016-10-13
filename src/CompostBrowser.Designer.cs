@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CompostBrowser));
             this.CompositionBrowser = new System.Windows.Forms.DataGridView();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -38,17 +37,24 @@
             this.closeDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.DocumentBrowser = new System.Windows.Forms.DataGridView();
             this.VersionBrowser = new System.Windows.Forms.DataGridView();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.CompositionBrowser)).BeginInit();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DocumentBrowser)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.VersionBrowser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
             // CompositionBrowser
@@ -56,13 +62,16 @@
             this.CompositionBrowser.AllowUserToAddRows = false;
             this.CompositionBrowser.AllowUserToDeleteRows = false;
             this.CompositionBrowser.AllowUserToOrderColumns = true;
+            this.CompositionBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.CompositionBrowser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.CompositionBrowser.Location = new System.Drawing.Point(12, 57);
+            this.CompositionBrowser.Location = new System.Drawing.Point(12, 9);
             this.CompositionBrowser.MultiSelect = false;
             this.CompositionBrowser.Name = "CompositionBrowser";
             this.CompositionBrowser.RowHeadersVisible = false;
             this.CompositionBrowser.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.CompositionBrowser.Size = new System.Drawing.Size(1560, 372);
+            this.CompositionBrowser.Size = new System.Drawing.Size(1563, 361);
             this.CompositionBrowser.TabIndex = 0;
             this.CompositionBrowser.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellEdited);
             this.CompositionBrowser.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCompositionBrowserRowEnter);
@@ -73,7 +82,6 @@
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.menuStrip1);
-            this.toolStripContainer1.ContentPanel.Controls.Add(this.toolStrip1);
             this.toolStripContainer1.ContentPanel.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1582, 24);
             this.toolStripContainer1.Location = new System.Drawing.Point(1, 2);
@@ -91,7 +99,7 @@
             this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(-5, -1);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(176, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(84, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -141,38 +149,21 @@
             this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "Edit";
             // 
-            // toolStrip1
-            // 
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(35, 25);
-            this.toolStrip1.TabIndex = 0;
-            this.toolStrip1.Text = "toolStrip1";
-            // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
-            // 
             // DocumentBrowser
             // 
             this.DocumentBrowser.AllowUserToAddRows = false;
             this.DocumentBrowser.AllowUserToDeleteRows = false;
             this.DocumentBrowser.AllowUserToOrderColumns = true;
+            this.DocumentBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DocumentBrowser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DocumentBrowser.Location = new System.Drawing.Point(12, 437);
+            this.DocumentBrowser.Location = new System.Drawing.Point(12, 3);
             this.DocumentBrowser.MultiSelect = false;
             this.DocumentBrowser.Name = "DocumentBrowser";
             this.DocumentBrowser.RowHeadersVisible = false;
             this.DocumentBrowser.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.DocumentBrowser.Size = new System.Drawing.Size(794, 315);
+            this.DocumentBrowser.Size = new System.Drawing.Size(776, 347);
             this.DocumentBrowser.TabIndex = 2;
             this.DocumentBrowser.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellEdited);
             this.DocumentBrowser.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnDocumentBrowserRowEnter);
@@ -182,24 +173,59 @@
             this.VersionBrowser.AllowUserToAddRows = false;
             this.VersionBrowser.AllowUserToDeleteRows = false;
             this.VersionBrowser.AllowUserToOrderColumns = true;
+            this.VersionBrowser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.VersionBrowser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.VersionBrowser.Location = new System.Drawing.Point(812, 437);
+            this.VersionBrowser.Location = new System.Drawing.Point(3, 3);
             this.VersionBrowser.MultiSelect = false;
             this.VersionBrowser.Name = "VersionBrowser";
             this.VersionBrowser.RowHeadersVisible = false;
             this.VersionBrowser.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.VersionBrowser.Size = new System.Drawing.Size(760, 315);
+            this.VersionBrowser.Size = new System.Drawing.Size(777, 347);
             this.VersionBrowser.TabIndex = 3;
             this.VersionBrowser.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellEdited);
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Location = new System.Drawing.Point(-4, 26);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.CompositionBrowser);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
+            this.splitContainer1.Size = new System.Drawing.Size(1587, 739);
+            this.splitContainer1.SplitterDistance = 373;
+            this.splitContainer1.TabIndex = 4;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.DocumentBrowser);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.VersionBrowser);
+            this.splitContainer2.Size = new System.Drawing.Size(1587, 362);
+            this.splitContainer2.SplitterDistance = 791;
+            this.splitContainer2.TabIndex = 0;
             // 
             // CompostBrowser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1584, 762);
-            this.Controls.Add(this.VersionBrowser);
-            this.Controls.Add(this.DocumentBrowser);
-            this.Controls.Add(this.CompositionBrowser);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStripContainer1);
             this.Name = "CompostBrowser";
             this.Text = "CompostBrowser";
@@ -211,10 +237,16 @@
             this.toolStripContainer1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DocumentBrowser)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.VersionBrowser)).EndInit();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -223,8 +255,6 @@
 
         private System.Windows.Forms.DataGridView CompositionBrowser;
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
@@ -234,5 +264,7 @@
         private System.Windows.Forms.ToolStripMenuItem saveDatabaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeDatabaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer splitContainer2;
     }
 }

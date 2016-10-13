@@ -37,13 +37,19 @@ namespace FXGuild.Compost
 
         private void button1_Click(object a_Sender, EventArgs a_E)
         {
-            var dialog = new OpenFileDialog();
+            var dialog = new OpenFileDialog
+            {
+                Multiselect = true
+            };
             dialog.ShowDialog();
             foreach (string file in dialog.FileNames)
             {
                 if (!listView1.Items.ContainsKey(file))
                 {
                     var item = listView1.Items.Add(file, file, 0);
+                    // Add to group
+                    // We must be able to delete elements
+                    // We automatically pick the newest software partition as the main file
                 }
             }
         }
