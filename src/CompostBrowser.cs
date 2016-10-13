@@ -319,7 +319,6 @@ namespace FXGuild.Compost
 
         private void OnFileToolbarExit(object a_Sender, EventArgs a_Args)
         {
-            AskToSaveChanges();
             Close();
         }
 

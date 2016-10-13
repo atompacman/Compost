@@ -52,10 +52,10 @@ namespace FXGuild.Compost
             {
                 #region Properties
 
-                [DataMember(IsRequired = true), ColumnInfo(RelativeColumnWidth = 0.2)]
+                [DataMember(IsRequired = true), ColumnInfo(RelativeColumnWidth = 0.4)]
                 public uint MajorVersionNumber { get; set; }
 
-                [DataMember(IsRequired = true), ColumnInfo(RelativeColumnWidth = 0.2)]
+                [DataMember(IsRequired = true), ColumnInfo(RelativeColumnWidth = 0.4)]
                 public uint MinorVersionNumber { get; set; }
 
                 [DataMember(IsRequired = true), ColumnInfo(RelativeColumnWidth = 0.8)]
@@ -80,7 +80,7 @@ namespace FXGuild.Compost
             [DataMember(IsRequired = true), ColumnInfo(RelativeColumnWidth = 1.0)]
             public string Name { get; set; }
 
-            [DataMember(IsRequired = true), ColumnInfo(RelativeColumnWidth = 0.3)]
+            [DataMember(IsRequired = true), ColumnInfo(RelativeColumnWidth = 0.8)]
             public Type DocType { get; set; }
 
             [DataMember(IsRequired = true), ColumnInfo(RelativeColumnWidth = 2.0)]
@@ -109,10 +109,10 @@ namespace FXGuild.Compost
         [DataMember(IsRequired = true)]
         public List<Document> Documents { get; set; }
 
-        [DataMember(IsRequired = true), ColumnInfo(RelativeColumnWidth = 1.0)]
+        [DataMember(IsRequired = true), ColumnInfo(RelativeColumnWidth = 1.1)]
         public List<string> Authors { get; set; }
 
-        [DataMember(IsRequired = true), ColumnInfo(RelativeColumnWidth = 0.8)]
+        [DataMember(IsRequired = true), ColumnInfo(RelativeColumnWidth = 0.7)]
         public string Era { get; set; }
 
         [DataMember(IsRequired = true), ColumnInfo(RelativeColumnWidth = 0.6)]
@@ -127,7 +127,7 @@ namespace FXGuild.Compost
         [DataMember(IsRequired = true), ColumnInfo(RelativeColumnWidth = 1.2)]
         public string SetTitle { get; set; }
 
-        [DataMember(IsRequired = true), ColumnInfo(RelativeColumnWidth = 0.5)]
+        [DataMember(IsRequired = true), ColumnInfo(RelativeColumnWidth = 0.6)]
         public Tier QualityTier { get; set; }
 
         [DataMember(IsRequired = true), ColumnInfo(RelativeColumnWidth = 1.3)]
