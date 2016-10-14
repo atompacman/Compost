@@ -24,6 +24,7 @@ using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Windows.Forms;
+using Compost.src;
 
 namespace FXGuild.Compost
 {
@@ -282,6 +283,19 @@ namespace FXGuild.Compost
         private void OnExit(object a_Sender, FormClosingEventArgs a_Args)
         {
             AskToSaveChanges();
+        }
+        
+        private void OnFileToolbarNewDatabase(object a_Sender, EventArgs a_Args)
+        {
+            if (!AskToSaveChanges())
+            {
+                return;
+            }
+
+            // Open blocking window
+            Enabled = false;
+            var browser = new DatabaseSettingsEditor(() => Enabled = true);
+            browser.Show();
         }
 
         private void OnFileToolbarOpenDatabase(object a_Sender, EventArgs a_Args)

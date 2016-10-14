@@ -44,6 +44,7 @@
             this.VersionBrowser = new System.Windows.Forms.DataGridView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.newDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.CompositionBrowser)).BeginInit();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -112,6 +113,7 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newDatabaseToolStripMenuItem,
             this.openDatabaseToolStripMenuItem,
             this.saveDatabaseToolStripMenuItem,
             this.importToolStripMenuItem,
@@ -251,6 +253,13 @@
             this.splitContainer2.SplitterDistance = 791;
             this.splitContainer2.TabIndex = 0;
             // 
+            // newDatabaseToolStripMenuItem
+            // 
+            this.newDatabaseToolStripMenuItem.Name = "newDatabaseToolStripMenuItem";
+            this.newDatabaseToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.newDatabaseToolStripMenuItem.Text = "New database...";
+            this.newDatabaseToolStripMenuItem.Click += new System.EventHandler(this.OnFileToolbarNewDatabase);
+            // 
             // CompostBrowser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -300,5 +309,6 @@
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem multifileCompositionToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem newDatabaseToolStripMenuItem;
     }
 }
