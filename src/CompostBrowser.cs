@@ -85,7 +85,8 @@ namespace FXGuild.Compost
         [STAThread]
         public static void Main(string[] a_Args)
         {
-            //var browser = new MultiFileCompositionImporter();
+            // Needed to display ListView groups
+            Application.EnableVisualStyles();
 
             // Create main window
             var browser = new CompostBrowser();
@@ -183,7 +184,7 @@ namespace FXGuild.Compost
 
         private void SaveCopy(string a_Path)
         {
-            using (var stream = File.OpenWrite(a_Path))
+            using (var stream = File.Create(a_Path))
             {
                 using (var writer = JsonReaderWriterFactory.CreateJsonWriter(
                     stream, Encoding.UTF8, true, true))
@@ -301,6 +302,12 @@ namespace FXGuild.Compost
         private void OnFileToolbarSaveDatabase(object a_Sender, EventArgs a_Args)
         {
             SaveDatabase();
+        }
+
+        private void OnFileToolBarImportMultiFileComposition(object a_Sender, EventArgs a_Args)
+        {
+            var browser = new MultiFileCompositionImporter(m_Database.ExtensionTable);
+            browser.Show();
         }
 
         private void OnFileToolbarCloseDatabase(object a_Sender, EventArgs a_Args)

@@ -34,6 +34,9 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.multifileCompositionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.closeDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,7 +45,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.CompositionBrowser)).BeginInit();
-            this.toolStripContainer1.ContentPanel.SuspendLayout();
+            this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DocumentBrowser)).BeginInit();
@@ -81,14 +84,17 @@
             // 
             // toolStripContainer1.ContentPanel
             // 
-            this.toolStripContainer1.ContentPanel.Controls.Add(this.menuStrip1);
             this.toolStripContainer1.ContentPanel.ForeColor = System.Drawing.SystemColors.ControlLight;
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1582, 24);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1582, 25);
             this.toolStripContainer1.Location = new System.Drawing.Point(1, 2);
             this.toolStripContainer1.Name = "toolStripContainer1";
             this.toolStripContainer1.Size = new System.Drawing.Size(1582, 49);
             this.toolStripContainer1.TabIndex = 1;
             this.toolStripContainer1.Text = "toolStripContainer1";
+            // 
+            // toolStripContainer1.TopToolStripPanel
+            // 
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.menuStrip1);
             // 
             // menuStrip1
             // 
@@ -97,9 +103,9 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(-5, -1);
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(84, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1582, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -108,6 +114,8 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openDatabaseToolStripMenuItem,
             this.saveDatabaseToolStripMenuItem,
+            this.importToolStripMenuItem,
+            this.toolStripSeparator1,
             this.closeDatabaseToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -128,6 +136,26 @@
             this.saveDatabaseToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.saveDatabaseToolStripMenuItem.Text = "Save database";
             this.saveDatabaseToolStripMenuItem.Click += new System.EventHandler(this.OnFileToolbarSaveDatabase);
+            // 
+            // importToolStripMenuItem
+            // 
+            this.importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.multifileCompositionToolStripMenuItem});
+            this.importToolStripMenuItem.Name = "importToolStripMenuItem";
+            this.importToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.importToolStripMenuItem.Text = "Import";
+            // 
+            // multifileCompositionToolStripMenuItem
+            // 
+            this.multifileCompositionToolStripMenuItem.Name = "multifileCompositionToolStripMenuItem";
+            this.multifileCompositionToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.multifileCompositionToolStripMenuItem.Text = "Multifile composition...";
+            this.multifileCompositionToolStripMenuItem.Click += new System.EventHandler(this.OnFileToolBarImportMultiFileComposition);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(159, 6);
             // 
             // closeDatabaseToolStripMenuItem
             // 
@@ -188,6 +216,9 @@
             // 
             // splitContainer1
             // 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.Location = new System.Drawing.Point(-4, 26);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
@@ -231,8 +262,8 @@
             this.Text = "CompostBrowser";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnExit);
             ((System.ComponentModel.ISupportInitialize)(this.CompositionBrowser)).EndInit();
-            this.toolStripContainer1.ContentPanel.ResumeLayout(false);
-            this.toolStripContainer1.ContentPanel.PerformLayout();
+            this.toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
+            this.toolStripContainer1.TopToolStripPanel.PerformLayout();
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -266,5 +297,8 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem multifileCompositionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

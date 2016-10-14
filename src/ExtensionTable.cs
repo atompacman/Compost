@@ -86,10 +86,15 @@ namespace FXGuild.Compost
             AssertExtensionExists(a_Ext);
             m_Extensions.Remove(a_Ext);
         }
-
+        
+        public bool HasExtension(string a_Ext)
+        {
+            return m_Extensions.ContainsKey(a_Ext);
+        }
+        
         private void AssertExtensionExists(string a_Ext)
         {
-            if (!m_Extensions.ContainsKey(a_Ext))
+            if (!HasExtension(a_Ext))
             {
                 throw new ArgumentException("No registered extension \"" + a_Ext + "\" found");
             }
@@ -97,7 +102,7 @@ namespace FXGuild.Compost
 
         private void AssertExtensionDoesNotExists(string a_Ext)
         {
-            if (m_Extensions.ContainsKey(a_Ext))
+            if (HasExtension(a_Ext))
             {
                 throw new ArgumentException("Extension \"" + a_Ext + "\" is already registered");
             }

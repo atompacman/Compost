@@ -81,8 +81,32 @@
   ],
   "ExtensionTable": {
     "Extensions": {
+      "tg": {
+        "AppPath": "D:\\Program Files (x86)\\Guitar Pro 5\\GP5.exe",
+        "DocType": 0
+      },
+      "ptb": {
+        "AppPath": "D:\\Program Files (x86)\\Guitar Pro 5\\GP5.exe",
+        "DocType": 0
+      },
+      "gtp": {
+        "AppPath": "D:\\Program Files (x86)\\Guitar Pro 5\\GP5.exe",
+        "DocType": 0
+      },
+      "gp3": {
+        "AppPath": "D:\\Program Files (x86)\\Guitar Pro 5\\GP5.exe",
+        "DocType": 0
+      },
+      "gp4": {
+        "AppPath": "D:\\Program Files (x86)\\Guitar Pro 5\\GP5.exe",
+        "DocType": 0
+      },
       "gp5": {
         "AppPath": "D:\\Program Files (x86)\\Guitar Pro 5\\GP5.exe",
+        "DocType": 0
+      },
+      "gpx": {
+        "AppPath": "D:\\Program Files (x86)\\Guitar Pro 6\\GuitarPro.exe",
         "DocType": 0
       }
     }
