@@ -304,12 +304,11 @@ namespace FXGuild.Compost
             {
                 return;
             }
-
-            var dialog = new FolderBrowserDialog();
+            var dialog = new OpenFileDialog();
             dialog.ShowDialog();
-            if (dialog.SelectedPath.Length != 0)
+            if (dialog.FileName.Length != 0)
             {
-                LoadDatabase(dialog.SelectedPath);
+                LoadDatabase(dialog.FileName);
             }
         }
 
