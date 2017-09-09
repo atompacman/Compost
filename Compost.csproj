@@ -7,10 +7,25 @@
     <ProjectGuid>{CB1D1376-0BD2-4893-B0AD-265E4B288A56}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Compost</RootNamespace>
+    <RootNamespace>StainedGlassGuild.Compost</RootNamespace>
     <AssemblyName>Compost</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,9 +48,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,62 +61,85 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataModel\Document.cs" />
+    <Compile Include="DataModel\Library.cs" />
+    <Compile Include="DataModel\Composition.cs" />
+    <Compile Include="DataModel\Version.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="src\ClassBasedDataGridViewUpdater.cs" />
-    <Compile Include="src\Composition.cs" />
-    <Compile Include="src\CompostBrowser.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\CompostBrowser.Designer.cs">
-      <DependentUpon>CompostBrowser.cs</DependentUpon>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\DatabaseSettingsEditor.cs">
+    <Compile Include="GUI\DatabaseSettingsEditor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="src\DatabaseSettingsEditor.Designer.cs">
+    <Compile Include="GUI\DatabaseSettingsEditor.Designer.cs">
       <DependentUpon>DatabaseSettingsEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\ExtensionAdder.cs">
+    <Compile Include="GUI\ExtensionAdder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="src\ExtensionAdder.Designer.cs">
+    <Compile Include="GUI\ExtensionAdder.Designer.cs">
       <DependentUpon>ExtensionAdder.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\MultiFileCompositionImporter.cs">
+    <Compile Include="GUI\CompostBrowser.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="src\MultiFileCompositionImporter.Designer.cs">
+    <Compile Include="GUI\CompostBrowser.Designer.cs">
+      <DependentUpon>CompostBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\MultiFileCompositionImporter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\MultiFileCompositionImporter.Designer.cs">
       <DependentUpon>MultiFileCompositionImporter.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\ExtensionTable.cs" />
-    <Compile Include="src\Database.cs" />
+    <Compile Include="DataModel\ExtensionTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Properties\DataSources\Compost.Database.Database.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="src\CompostBrowser.resx">
-      <DependentUpon>CompostBrowser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\DatabaseSettingsEditor.resx">
+    <EmbeddedResource Include="GUI\DatabaseSettingsEditor.resx">
       <DependentUpon>DatabaseSettingsEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="src\ExtensionAdder.resx">
+    <EmbeddedResource Include="GUI\ExtensionAdder.resx">
       <DependentUpon>ExtensionAdder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="src\MultiFileCompositionImporter.resx">
+    <EmbeddedResource Include="GUI\CompostBrowser.resx">
+      <DependentUpon>CompostBrowser.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\MultiFileCompositionImporter.resx">
       <DependentUpon>MultiFileCompositionImporter.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

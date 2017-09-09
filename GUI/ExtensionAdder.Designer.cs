@@ -1,4 +1,4 @@
-﻿namespace Compost.src
+﻿namespace StainedGlassGuild.Compost.GUI
 {
     internal partial class ExtensionAdder
     {

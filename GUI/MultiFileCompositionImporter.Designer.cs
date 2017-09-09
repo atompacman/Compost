@@ -1,4 +1,4 @@
-﻿namespace FXGuild.Compost
+﻿namespace StainedGlassGuild.Compost.GUI
 {
     internal partial class MultiFileCompositionImporter
     {

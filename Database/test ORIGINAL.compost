@@ -1,92 +1,83 @@
 {
-  "CompositionCustomPropertyNames": [
-	"Authors",
-	"Era",
-	"SetTitle",
-	"Rating",
-	"Instruments",
-	"Description",
-    "Genre",
-    "Sub-genre"
-  ],
   "Compositions": [
     {
-      "CustomProperties": {
-        "Genre": "cascas",
-        "Sub-genre": "Alternative Rock",
-        "Description": "trol"
-      },
+      "Authors": [
+        "Moi",
+        "Toi",
+        "koku"
+      ],
+      "Description": "Tout premier fichier GP5 enregistré (non-modifié)",
       "Documents": [
         {
-          "CustomProperties": {
-            "Description": "cascas - poool"
-          },
-          "Name": "Henryddd",
-          "DocType": 1,
+          "Description": "Super meat ballz",
+          "DocType": 2,
+          "Name": "Da Partition",
           "Versions": [
             {
               "CreationDate": "\/Date(1335205592410)\/",
-              "CustomProperties": {
-                "Description": "cascas - poool - lo"
-              },
-              "FilePath": "ayo",
+              "Description": "ADIBOUx",
               "LastModificationDate": "\/Date(1332205592410)\/",
-              "VersionNumber": "1.4"
+              "MajorVersionNumber": 1,
+              "MinorVersionNumber": 4
             }
           ]
         }
       ],
-      "Title": "Castle Themeppp"
+      "Era": "Yolo",
+      "Genre": "VGM",
+      "Instruments": [
+        "Chiptune"
+      ],
+      "QualityTier": 2,
+      "SetTitle": "Super Mario World",
+      "Subgenre": "SNES",
+      "Title": "Castle Theme"
     },
     {
-      "CustomProperties": {
-        "Genre": "coco",
-        "Sub-genre": "goglu",
-        "Description": "caca"
-      },
+      "Authors": [
+        "Eux"
+      ],
+      "Description": "Du stock pertinanto",
       "Documents": [
         {
-          "CustomProperties": {
-            "Description": "coco - hiboo"
-          },
-          "Name": "juliiii",
+          "Description": "Super meat ballz 1",
           "DocType": 2,
+          "Name": "Da Partition",
           "Versions": [
             {
               "CreationDate": "\/Date(1335205592410)\/",
-              "CustomProperties": {
-                "Description": "coco - hiboo - cunt"
-              },
-              "FilePath": "ayo",
+              "Description": "GONOREY",
               "LastModificationDate": "\/Date(1332205592410)\/",
-              "VersionNumber": "9.2"
+              "MajorVersionNumber": 1,
+              "MinorVersionNumber": 4
             }
           ]
         },
         {
-          "CustomProperties": {
-            "Description": "coco - ccaasascasca"
-          },
-          "Name": "bkb",
-          "DocType": 1,
+          "Description": "Super meat ballz 2",
+          "DocType": 3,
+          "Name": "Da ass Partition",
           "Versions": [
             {
-              "CreationDate": "\/Date(1335605592410)\/",
-              "CustomProperties": {
-                "Description": "coco - ccaasascasca - lkk"
-              },
-              "FilePath": "tooooooo",
+              "CreationDate": "\/Date(1335205592410)\/",
+              "Description": "Killtaculotte",
               "LastModificationDate": "\/Date(1332205592410)\/",
-              "VersionNumber": "0.3.11"
+              "MajorVersionNumber": 1,
+              "MinorVersionNumber": 4
             }
           ]
         }
       ],
+      "Era": "Cayo",
+      "Genre": "Metal",
+      "Instruments": [
+        "Bass"
+      ],
+      "QualityTier": 0,
+      "SetTitle": "Super Mario World",
+      "Subgenre": "SNES",
       "Title": "Castle Theme"
     }
-  ],
-  "DocumentCustomPropertyNames": [
-    "Description"
   ],
   "ExtensionTable": {
     "Extensions": {
@@ -121,8 +112,5 @@
     }
   },
   "FileHierarchy": "$CATEGORY\/$ERA\/$SET\/$CREATION_DATE - $TITLE",
-  "Name": "MyCompostLibrary",
-  "VersionCustomPropertyNames": [
-    "Description"
-  ]
+  "Name": "MyCompostDatabase"
 }
