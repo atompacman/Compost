@@ -29,7 +29,7 @@ namespace StainedGlassGuild.Compost.DataModel
       public string FileHierarchy { get; set; }
 
       [DataMember(IsRequired = true)]
-      public ExtensionTable ExtensionTable { get; set; }
+      public Dictionary<string, Composition.Document.Type> ExtensionMappings { get; set; }
 
       [DataMember(IsRequired = true)]
       public List<string> CompositionCustomPropertyNames { get; set; }

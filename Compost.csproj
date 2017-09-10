@@ -61,10 +61,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\LibraryUtils.cs" />
     <Compile Include="DataModel\Document.cs" />
     <Compile Include="DataModel\Library.cs" />
     <Compile Include="DataModel\Composition.cs" />
     <Compile Include="DataModel\Version.cs" />
+    <Compile Include="GUI\ImportSingleFileCompositionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\ImportSingleFileCompositionDialog.Designer.cs">
+      <DependentUpon>ImportSingleFileCompositionDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -76,17 +83,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GUI\DatabaseSettingsEditor.cs">
+    <Compile Include="GUI\EditLibraryConfigurationDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\DatabaseSettingsEditor.Designer.cs">
-      <DependentUpon>DatabaseSettingsEditor.cs</DependentUpon>
+    <Compile Include="GUI\EditLibraryConfigurationDialog.Designer.cs">
+      <DependentUpon>EditLibraryConfigurationDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\ExtensionAdder.cs">
+    <Compile Include="GUI\CreateExtensionMappingDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\ExtensionAdder.Designer.cs">
-      <DependentUpon>ExtensionAdder.cs</DependentUpon>
+    <Compile Include="GUI\CreateExtensionMappingDialog.Designer.cs">
+      <DependentUpon>CreateExtensionMappingDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\CompostBrowser.cs">
       <SubType>Form</SubType>
@@ -94,13 +101,6 @@
     <Compile Include="GUI\CompostBrowser.Designer.cs">
       <DependentUpon>CompostBrowser.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\MultiFileCompositionImporter.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI\MultiFileCompositionImporter.Designer.cs">
-      <DependentUpon>MultiFileCompositionImporter.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DataModel\ExtensionTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -110,22 +110,22 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="GUI\ImportSingleFileCompositionDialog.resx">
+      <DependentUpon>ImportSingleFileCompositionDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\DatabaseSettingsEditor.resx">
-      <DependentUpon>DatabaseSettingsEditor.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\EditLibraryConfigurationDialog.resx">
+      <DependentUpon>EditLibraryConfigurationDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\ExtensionAdder.resx">
-      <DependentUpon>ExtensionAdder.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\CreateExtensionMappingDialog.resx">
+      <DependentUpon>CreateExtensionMappingDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\CompostBrowser.resx">
       <DependentUpon>CompostBrowser.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUI\MultiFileCompositionImporter.resx">
-      <DependentUpon>MultiFileCompositionImporter.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -140,6 +140,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\DataSources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImportMultiDocumentCompositionButtonImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImportMultiVersionCompositionButtonImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImportSingleFileCompositionButtonImage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -11,12 +11,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Runtime.InteropServices;
-using System.Runtime.Serialization.Json;
-using System.Text;
 using System.Windows.Forms;
 
+using StainedGlassGuild.Compost.Core;
 using StainedGlassGuild.Compost.DataModel;
 
 namespace StainedGlassGuild.Compost.GUI
@@ -33,32 +31,26 @@ namespace StainedGlassGuild.Compost.GUI
 
       #endregion
 
-      #region Compile-time constants
+      #region Static fields
 
-      private const string BACKUP_DIR_PREFIX = "Backup";
-      private const string BACKUP_FILE_TIMESTAMP_PATTERN = "MM-dd-yyyy HH-mm-ss";
-
-      #endregion
-
-      #region Runtime constants
-
-      private static readonly DataContractJsonSerializer DCJS;
+      public static CompostBrowser Instance;
 
       #endregion
 
       #region Private fields
 
       private bool m_HasUnsavedChanges;
-      private Library m_CurrDB;
-      private string m_CurrDbFilePath;
+      private string m_CurrLibFilePath;
 
       #endregion
 
       #region Properties
 
-      private bool IsDatabaseOpened => m_CurrDB != null;
+      public Library CurrentLibrary { get; private set; }
 
-      private bool HasUnsavedChanges
+      private bool IsDatabaseOpened => CurrentLibrary != null;
+
+      public bool HasUnsavedChanges
       {
          get => m_HasUnsavedChanges;
          set
@@ -78,20 +70,11 @@ namespace StainedGlassGuild.Compost.GUI
 
       #region Constructors
 
-      static CompostBrowser()
-      {
-         // Create json database object parser
-         var settings = new DataContractJsonSerializerSettings
-         {
-            UseSimpleDictionaryFormat = true
-         };
-         DCJS = new DataContractJsonSerializer(typeof(Library), settings);
-      }
-
       public CompostBrowser()
       {
          InitializeComponent();
          CloseDatabase();
+         Instance = this;
       }
 
       #endregion
@@ -174,7 +157,7 @@ namespace StainedGlassGuild.Compost.GUI
       private void LoadDatabase(string a_Path)
       {
          // Nothing to do if asked to open the same database
-         if (m_CurrDbFilePath == a_Path)
+         if (m_CurrLibFilePath == a_Path)
          {
             return;
          }
@@ -186,11 +169,8 @@ namespace StainedGlassGuild.Compost.GUI
          }
 
          // Parse json database file
-         m_CurrDbFilePath = a_Path;
-         using (var stream = File.OpenRead(a_Path))
-         {
-            m_CurrDB = (Library) DCJS.ReadObject(stream);
-         }
+         m_CurrLibFilePath = a_Path;
+         CurrentLibrary = LibraryUtils.Open(a_Path);
 
          ///////
          dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
@@ -199,7 +179,7 @@ namespace StainedGlassGuild.Compost.GUI
             DataPropertyName = "Title"
          });
 
-         foreach (string custPropName in m_CurrDB.CompositionCustomPropertyNames)
+         foreach (string custPropName in CurrentLibrary.CompositionCustomPropertyNames)
          {
             dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
             {
@@ -220,7 +200,7 @@ namespace StainedGlassGuild.Compost.GUI
             DataSource = Enum.GetValues(typeof(Composition.Document.Type))
          });
 
-         foreach (string custPropName in m_CurrDB.DocumentCustomPropertyNames)
+         foreach (string custPropName in CurrentLibrary.DocumentCustomPropertyNames)
          {
             dataGridView2.Columns.Add(new DataGridViewTextBoxColumn
             {
@@ -240,7 +220,7 @@ namespace StainedGlassGuild.Compost.GUI
             DataPropertyName = "FilePath"
          });
 
-         foreach (string custPropName in m_CurrDB.VersionCustomPropertyNames)
+         foreach (string custPropName in CurrentLibrary.VersionCustomPropertyNames)
          {
             dataGridView3.Columns.Add(new DataGridViewTextBoxColumn
             {
@@ -251,25 +231,13 @@ namespace StainedGlassGuild.Compost.GUI
          ///////
 
          // Populate composition browser
-         PopulateGrid(dataGridView1, m_CurrDB.Compositions);
+         PopulateGrid(dataGridView1, CurrentLibrary.Compositions);
 
          SetControlsEnabled(true);
 
          UpdateTitle();
 
          closeDatabaseToolStripMenuItem.Enabled = true;
-      }
-
-      private void WriteDatabase(string a_Path)
-      {
-         using (var stream = File.Create(a_Path))
-         {
-            using (var writer = JsonReaderWriterFactory.CreateJsonWriter(
-               stream, Encoding.UTF8, true, true))
-            {
-               DCJS.WriteObject(writer, m_CurrDB);
-            }
-         }
       }
 
       private void SaveDatabase()
@@ -280,20 +248,7 @@ namespace StainedGlassGuild.Compost.GUI
             return;
          }
 
-         // Create archive directory if needed
-         string archiveDirName = BACKUP_DIR_PREFIX + '_' + m_CurrDB.Name;
-         string archiveDirPath = Path.Combine(Directory.GetCurrentDirectory(), archiveDirName);
-         if (!Directory.Exists(archiveDirPath))
-         {
-            Directory.CreateDirectory(archiveDirPath);
-         }
-
-         // Save a copy of the database in the archive directory
-         string timestamp = DateTime.Now.ToString(BACKUP_FILE_TIMESTAMP_PATTERN);
-         WriteDatabase(Path.Combine(archiveDirPath, timestamp));
-
-         // Overwrite current copy of the database
-         WriteDatabase(m_CurrDbFilePath);
+         LibraryUtils.Save(CurrentLibrary, m_CurrLibFilePath);
 
          // Change window title
          HasUnsavedChanges = false;
@@ -308,7 +263,7 @@ namespace StainedGlassGuild.Compost.GUI
             return true;
          }
 
-         switch (MessageBox.Show("Save database ?", "Save", MessageBoxButtons.YesNoCancel))
+         switch (MessageBox.Show("Save library?", "Unsaved changes", MessageBoxButtons.YesNoCancel))
          {
          case DialogResult.Yes:
             SaveDatabase();
@@ -344,8 +299,8 @@ namespace StainedGlassGuild.Compost.GUI
 
          SetControlsEnabled(false);
 
-         m_CurrDB = null;
-         m_CurrDbFilePath = string.Empty;
+         CurrentLibrary = null;
+         m_CurrLibFilePath = string.Empty;
          HasUnsavedChanges = false;
 
          closeDatabaseToolStripMenuItem.Enabled = false;
@@ -359,7 +314,7 @@ namespace StainedGlassGuild.Compost.GUI
             return;
          }
 
-         Text += " - " + m_CurrDB.Name;
+         Text += " - " + CurrentLibrary.Name;
          if (m_HasUnsavedChanges)
          {
             Text += "*";
@@ -387,6 +342,11 @@ namespace StainedGlassGuild.Compost.GUI
          SaveDatabase();
       }
 
+      private void OnClick_MenuStrip_FileConfigureLibrary(object a_Sender, EventArgs a_E)
+      {
+         new EditLibraryConfigurationDialog().ShowDialog();
+      }
+
       private void OnClick_MenuStrip_File_CloseLibrary(object a_Sender, EventArgs a_E)
       {
          if (!AskToSaveChanges())
@@ -400,6 +360,11 @@ namespace StainedGlassGuild.Compost.GUI
       private void OnClick_MenuStrip_File_Exit(object a_Sender, EventArgs a_E)
       {
          Close();
+      }
+
+      private void OnClick_MenuStrip_AddExistingCompositionSingleFile(object a_Sender, EventArgs a_E)
+      {
+         OnClick_ToolStrip_ImportSingleFile(a_Sender, a_E);
       }
 
       private void OnClick_MenuStrip_View_ShowHidePanels_Documents(object a_Sender, EventArgs a_E)
@@ -440,7 +405,7 @@ namespace StainedGlassGuild.Compost.GUI
 
       private Composition GetComposition(int a_CompoIdx)
       {
-         return m_CurrDB.Compositions[a_CompoIdx];
+         return CurrentLibrary.Compositions[a_CompoIdx];
       }
 
       private Composition GetCurrentComposition()
@@ -594,6 +559,12 @@ namespace StainedGlassGuild.Compost.GUI
                                               DataGridViewCellValueEventArgs a_E)
       {
          CellValueProcess_Versions(a_Sender, a_E, CellAction.SET_VALUE);
+      }
+
+      private void OnClick_ToolStrip_ImportSingleFile(object a_Sender, EventArgs a_E)
+      {
+         var dialog = new ImportSingleFileCompositionDialog();
+         dialog.ShowDialog();
       }
 
       #endregion

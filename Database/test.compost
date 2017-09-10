@@ -1,11 +1,11 @@
 {
   "CompositionCustomPropertyNames": [
-	"Authors",
-	"Era",
-	"SetTitle",
-	"Rating",
-	"Instruments",
-	"Description",
+    "Authors",
+    "Era",
+    "SetTitle",
+    "Rating",
+    "Instruments",
+    "Description",
     "Genre",
     "Sub-genre"
   ],
@@ -14,15 +14,16 @@
       "CustomProperties": {
         "Genre": "cascas",
         "Sub-genre": "Alternative Rock",
-        "Description": "trol"
+        "Description": "trol",
+        "Era": "future"
       },
       "Documents": [
         {
           "CustomProperties": {
             "Description": "cascas - poool"
           },
-          "Name": "Henryddd",
           "DocType": 1,
+          "Name": "Henryddd",
           "Versions": [
             {
               "CreationDate": "\/Date(1335205592410)\/",
@@ -49,8 +50,8 @@
           "CustomProperties": {
             "Description": "coco - hiboo"
           },
-          "Name": "juliiii",
           "DocType": 2,
+          "Name": "juliiii",
           "Versions": [
             {
               "CreationDate": "\/Date(1335205592410)\/",
@@ -67,8 +68,8 @@
           "CustomProperties": {
             "Description": "coco - ccaasascasca"
           },
-          "Name": "bkb",
           "DocType": 1,
+          "Name": "bkb",
           "Versions": [
             {
               "CreationDate": "\/Date(1335605592410)\/",
@@ -88,37 +89,15 @@
   "DocumentCustomPropertyNames": [
     "Description"
   ],
-  "ExtensionTable": {
-    "Extensions": {
-      "tg": {
-        "AppPath": "D:\\Program Files (x86)\\Guitar Pro 5\\GP5.exe",
-        "DocType": 0
-      },
-      "ptb": {
-        "AppPath": "D:\\Program Files (x86)\\Guitar Pro 5\\GP5.exe",
-        "DocType": 0
-      },
-      "gtp": {
-        "AppPath": "D:\\Program Files (x86)\\Guitar Pro 5\\GP5.exe",
-        "DocType": 0
-      },
-      "gp3": {
-        "AppPath": "D:\\Program Files (x86)\\Guitar Pro 5\\GP5.exe",
-        "DocType": 0
-      },
-      "gp4": {
-        "AppPath": "D:\\Program Files (x86)\\Guitar Pro 5\\GP5.exe",
-        "DocType": 0
-      },
-      "gp5": {
-        "AppPath": "D:\\Program Files (x86)\\Guitar Pro 5\\GP5.exe",
-        "DocType": 0
-      },
-      "gpx": {
-        "AppPath": "D:\\Program Files (x86)\\Guitar Pro 6\\GuitarPro.exe",
-        "DocType": 0
-      }
-    }
+  "ExtensionMappings": {
+    "tg": 0,
+    "ptb": 0,
+    "gp3": 0,
+    "gp4": 0,
+    "gp5": 0,
+    "gpx": 0,
+    "compost": 5,
+    "gtp": 3
   },
   "FileHierarchy": "$CATEGORY\/$ERA\/$SET\/$CREATION_DATE - $TITLE",
   "Name": "MyCompostLibrary",

@@ -33,7 +33,6 @@ namespace StainedGlassGuild.Compost.GUI
       private void InitializeComponent()
       {
          this.components = new System.ComponentModel.Container();
-         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CompostBrowser));
          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
          System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -41,10 +40,15 @@ namespace StainedGlassGuild.Compost.GUI
          this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.openDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+         this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+         this.configureLibraryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
          this.closeDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+         this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+         this.multidocumentCompositionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+         this.multipleVersionsCompositionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.panelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
          this.ToolStripItem_View_ShowHidePanels_Documents = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,26 +58,23 @@ namespace StainedGlassGuild.Compost.GUI
          this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
          this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
          this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-         this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-         this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-         this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
          this.splitContainer1 = new System.Windows.Forms.SplitContainer();
          this.groupBox3 = new System.Windows.Forms.GroupBox();
          this.dataGridView1 = new System.Windows.Forms.DataGridView();
-         this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-         this.customPropertiesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-         this.newCompositionBindingSource = new System.Windows.Forms.BindingSource(this.components);
          this.splitContainer2 = new System.Windows.Forms.SplitContainer();
          this.groupBox1 = new System.Windows.Forms.GroupBox();
          this.dataGridView2 = new System.Windows.Forms.DataGridView();
-         this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-         this.customPropertiesDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-         this.newDocumentBindingSource = new System.Windows.Forms.BindingSource(this.components);
          this.groupBox2 = new System.Windows.Forms.GroupBox();
          this.dataGridView3 = new System.Windows.Forms.DataGridView();
+         this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+         this.customPropertiesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+         this.newCompositionBindingSource = new System.Windows.Forms.BindingSource(this.components);
+         this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+         this.docTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+         this.customPropertiesDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+         this.newDocumentBindingSource = new System.Windows.Forms.BindingSource(this.components);
          this.filePathDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-         this.majorVersionNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-         this.minorVersionNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+         this.versionNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
          this.creationDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
          this.lastModificationDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
          this.customPropertiesDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -86,16 +87,16 @@ namespace StainedGlassGuild.Compost.GUI
          this.splitContainer1.SuspendLayout();
          this.groupBox3.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-         ((System.ComponentModel.ISupportInitialize)(this.newCompositionBindingSource)).BeginInit();
          ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
          this.splitContainer2.Panel1.SuspendLayout();
          this.splitContainer2.Panel2.SuspendLayout();
          this.splitContainer2.SuspendLayout();
          this.groupBox1.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-         ((System.ComponentModel.ISupportInitialize)(this.newDocumentBindingSource)).BeginInit();
          this.groupBox2.SuspendLayout();
          ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
+         ((System.ComponentModel.ISupportInitialize)(this.newCompositionBindingSource)).BeginInit();
+         ((System.ComponentModel.ISupportInitialize)(this.newDocumentBindingSource)).BeginInit();
          ((System.ComponentModel.ISupportInitialize)(this.newVersionBindingSource)).BeginInit();
          this.SuspendLayout();
          // 
@@ -109,7 +110,7 @@ namespace StainedGlassGuild.Compost.GUI
             this.helpToolStripMenuItem});
          this.menuStrip1.Location = new System.Drawing.Point(0, 0);
          this.menuStrip1.Name = "menuStrip1";
-         this.menuStrip1.Size = new System.Drawing.Size(1578, 33);
+         this.menuStrip1.Size = new System.Drawing.Size(1778, 33);
          this.menuStrip1.TabIndex = 0;
          this.menuStrip1.Text = "menuStrip1";
          // 
@@ -118,6 +119,8 @@ namespace StainedGlassGuild.Compost.GUI
          this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openDatabaseToolStripMenuItem,
             this.saveToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.configureLibraryToolStripMenuItem,
             this.toolStripSeparator1,
             this.closeDatabaseToolStripMenuItem,
             this.exitToolStripMenuItem});
@@ -138,8 +141,20 @@ namespace StainedGlassGuild.Compost.GUI
          this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
          this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
          this.saveToolStripMenuItem.Size = new System.Drawing.Size(271, 30);
-         this.saveToolStripMenuItem.Text = "Save library";
+         this.saveToolStripMenuItem.Text = "Save";
          this.saveToolStripMenuItem.Click += new System.EventHandler(this.OnClick_MenuStrip_File_SaveLibrary);
+         // 
+         // toolStripSeparator2
+         // 
+         this.toolStripSeparator2.Name = "toolStripSeparator2";
+         this.toolStripSeparator2.Size = new System.Drawing.Size(268, 6);
+         // 
+         // configureLibraryToolStripMenuItem
+         // 
+         this.configureLibraryToolStripMenuItem.Name = "configureLibraryToolStripMenuItem";
+         this.configureLibraryToolStripMenuItem.Size = new System.Drawing.Size(271, 30);
+         this.configureLibraryToolStripMenuItem.Text = "Configure library...";
+         this.configureLibraryToolStripMenuItem.Click += new System.EventHandler(this.OnClick_MenuStrip_FileConfigureLibrary);
          // 
          // toolStripSeparator1
          // 
@@ -151,7 +166,7 @@ namespace StainedGlassGuild.Compost.GUI
          this.closeDatabaseToolStripMenuItem.Enabled = false;
          this.closeDatabaseToolStripMenuItem.Name = "closeDatabaseToolStripMenuItem";
          this.closeDatabaseToolStripMenuItem.Size = new System.Drawing.Size(271, 30);
-         this.closeDatabaseToolStripMenuItem.Text = "Close library";
+         this.closeDatabaseToolStripMenuItem.Text = "Close";
          this.closeDatabaseToolStripMenuItem.Click += new System.EventHandler(this.OnClick_MenuStrip_File_CloseLibrary);
          // 
          // exitToolStripMenuItem
@@ -163,9 +178,35 @@ namespace StainedGlassGuild.Compost.GUI
          // 
          // addToolStripMenuItem
          // 
+         this.addToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newToolStripMenuItem,
+            this.multidocumentCompositionToolStripMenuItem,
+            this.multipleVersionsCompositionToolStripMenuItem});
          this.addToolStripMenuItem.Name = "addToolStripMenuItem";
-         this.addToolStripMenuItem.Size = new System.Drawing.Size(58, 29);
-         this.addToolStripMenuItem.Text = "Add";
+         this.addToolStripMenuItem.Size = new System.Drawing.Size(79, 29);
+         this.addToolStripMenuItem.Text = "Import";
+         // 
+         // newToolStripMenuItem
+         // 
+         this.newToolStripMenuItem.Image = global::StainedGlassGuild.Compost.Properties.Resources.ImportSingleFileCompositionButtonImage;
+         this.newToolStripMenuItem.Name = "newToolStripMenuItem";
+         this.newToolStripMenuItem.Size = new System.Drawing.Size(347, 30);
+         this.newToolStripMenuItem.Text = "Single file composition...";
+         this.newToolStripMenuItem.Click += new System.EventHandler(this.OnClick_MenuStrip_AddExistingCompositionSingleFile);
+         // 
+         // multidocumentCompositionToolStripMenuItem
+         // 
+         this.multidocumentCompositionToolStripMenuItem.Image = global::StainedGlassGuild.Compost.Properties.Resources.ImportMultiDocumentCompositionButtonImage;
+         this.multidocumentCompositionToolStripMenuItem.Name = "multidocumentCompositionToolStripMenuItem";
+         this.multidocumentCompositionToolStripMenuItem.Size = new System.Drawing.Size(347, 30);
+         this.multidocumentCompositionToolStripMenuItem.Text = "Multiple file composition...";
+         // 
+         // multipleVersionsCompositionToolStripMenuItem
+         // 
+         this.multipleVersionsCompositionToolStripMenuItem.Image = global::StainedGlassGuild.Compost.Properties.Resources.ImportMultiVersionCompositionButtonImage;
+         this.multipleVersionsCompositionToolStripMenuItem.Name = "multipleVersionsCompositionToolStripMenuItem";
+         this.multipleVersionsCompositionToolStripMenuItem.Size = new System.Drawing.Size(347, 30);
+         this.multipleVersionsCompositionToolStripMenuItem.Text = "Multiple versions composition...";
          // 
          // viewToolStripMenuItem
          // 
@@ -212,29 +253,27 @@ namespace StainedGlassGuild.Compost.GUI
          this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton1,
             this.toolStripButton2,
-            this.toolStripButton3,
-            this.toolStripButton4,
-            this.toolStripButton5,
-            this.toolStripButton6});
+            this.toolStripButton3});
          this.toolStrip1.Location = new System.Drawing.Point(9, 33);
          this.toolStrip1.Name = "toolStrip1";
-         this.toolStrip1.Size = new System.Drawing.Size(252, 43);
+         this.toolStrip1.Size = new System.Drawing.Size(132, 43);
          this.toolStrip1.TabIndex = 1;
          this.toolStrip1.Text = "toolStrip1";
          // 
          // toolStripButton1
          // 
          this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-         this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+         this.toolStripButton1.Image = global::StainedGlassGuild.Compost.Properties.Resources.ImportSingleFileCompositionButtonImage;
          this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
          this.toolStripButton1.Name = "toolStripButton1";
          this.toolStripButton1.Size = new System.Drawing.Size(40, 40);
          this.toolStripButton1.Text = "toolStripButton1";
+         this.toolStripButton1.Click += new System.EventHandler(this.OnClick_ToolStrip_ImportSingleFile);
          // 
          // toolStripButton2
          // 
          this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-         this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+         this.toolStripButton2.Image = global::StainedGlassGuild.Compost.Properties.Resources.ImportMultiDocumentCompositionButtonImage;
          this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
          this.toolStripButton2.Name = "toolStripButton2";
          this.toolStripButton2.Size = new System.Drawing.Size(40, 40);
@@ -243,38 +282,11 @@ namespace StainedGlassGuild.Compost.GUI
          // toolStripButton3
          // 
          this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-         this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
+         this.toolStripButton3.Image = global::StainedGlassGuild.Compost.Properties.Resources.ImportMultiVersionCompositionButtonImage;
          this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
          this.toolStripButton3.Name = "toolStripButton3";
          this.toolStripButton3.Size = new System.Drawing.Size(40, 40);
          this.toolStripButton3.Text = "toolStripButton3";
-         // 
-         // toolStripButton4
-         // 
-         this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-         this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-         this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-         this.toolStripButton4.Name = "toolStripButton4";
-         this.toolStripButton4.Size = new System.Drawing.Size(40, 40);
-         this.toolStripButton4.Text = "toolStripButton4";
-         // 
-         // toolStripButton5
-         // 
-         this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-         this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
-         this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-         this.toolStripButton5.Name = "toolStripButton5";
-         this.toolStripButton5.Size = new System.Drawing.Size(40, 40);
-         this.toolStripButton5.Text = "toolStripButton5";
-         // 
-         // toolStripButton6
-         // 
-         this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-         this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
-         this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-         this.toolStripButton6.Name = "toolStripButton6";
-         this.toolStripButton6.Size = new System.Drawing.Size(40, 40);
-         this.toolStripButton6.Text = "toolStripButton6";
          // 
          // splitContainer1
          // 
@@ -298,8 +310,8 @@ namespace StainedGlassGuild.Compost.GUI
          // 
          this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
          this.splitContainer1.Panel2MinSize = 200;
-         this.splitContainer1.Size = new System.Drawing.Size(1584, 925);
-         this.splitContainer1.SplitterDistance = 552;
+         this.splitContainer1.Size = new System.Drawing.Size(1784, 1125);
+         this.splitContainer1.SplitterDistance = 671;
          this.splitContainer1.TabIndex = 2;
          // 
          // groupBox3
@@ -311,7 +323,7 @@ namespace StainedGlassGuild.Compost.GUI
          this.groupBox3.Enabled = false;
          this.groupBox3.Location = new System.Drawing.Point(12, 56);
          this.groupBox3.Name = "groupBox3";
-         this.groupBox3.Size = new System.Drawing.Size(1554, 482);
+         this.groupBox3.Size = new System.Drawing.Size(1754, 601);
          this.groupBox3.TabIndex = 0;
          this.groupBox3.TabStop = false;
          this.groupBox3.Text = "Compositions";
@@ -344,29 +356,13 @@ namespace StainedGlassGuild.Compost.GUI
          this.dataGridView1.MultiSelect = false;
          this.dataGridView1.Name = "dataGridView1";
          this.dataGridView1.RowTemplate.Height = 28;
-         this.dataGridView1.Size = new System.Drawing.Size(1524, 441);
+         this.dataGridView1.Size = new System.Drawing.Size(1724, 560);
          this.dataGridView1.TabIndex = 0;
          this.dataGridView1.VirtualMode = true;
          this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellValueChanged);
          this.dataGridView1.CellValueNeeded += new System.Windows.Forms.DataGridViewCellValueEventHandler(this.OnCellValueNeeded_Compositions);
          this.dataGridView1.CellValuePushed += new System.Windows.Forms.DataGridViewCellValueEventHandler(this.OnCellValuePushed_Compositions);
          this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnRowEnter_Compositions);
-         // 
-         // titleDataGridViewTextBoxColumn
-         // 
-         this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
-         this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
-         this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
-         // 
-         // customPropertiesDataGridViewTextBoxColumn
-         // 
-         this.customPropertiesDataGridViewTextBoxColumn.DataPropertyName = "CustomProperties";
-         this.customPropertiesDataGridViewTextBoxColumn.HeaderText = "CustomProperties";
-         this.customPropertiesDataGridViewTextBoxColumn.Name = "customPropertiesDataGridViewTextBoxColumn";
-         // 
-         // newCompositionBindingSource
-         // 
-         this.newCompositionBindingSource.DataSource = typeof(Composition);
          // 
          // splitContainer2
          // 
@@ -384,8 +380,8 @@ namespace StainedGlassGuild.Compost.GUI
          // 
          this.splitContainer2.Panel2.Controls.Add(this.groupBox2);
          this.splitContainer2.Panel2MinSize = 400;
-         this.splitContainer2.Size = new System.Drawing.Size(1584, 369);
-         this.splitContainer2.SplitterDistance = 917;
+         this.splitContainer2.Size = new System.Drawing.Size(1784, 450);
+         this.splitContainer2.SplitterDistance = 1032;
          this.splitContainer2.TabIndex = 0;
          // 
          // groupBox1
@@ -397,7 +393,7 @@ namespace StainedGlassGuild.Compost.GUI
          this.groupBox1.Enabled = false;
          this.groupBox1.Location = new System.Drawing.Point(12, 3);
          this.groupBox1.Name = "groupBox1";
-         this.groupBox1.Size = new System.Drawing.Size(891, 350);
+         this.groupBox1.Size = new System.Drawing.Size(1006, 431);
          this.groupBox1.TabIndex = 0;
          this.groupBox1.TabStop = false;
          this.groupBox1.Text = "Documents";
@@ -413,7 +409,8 @@ namespace StainedGlassGuild.Compost.GUI
          this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
          this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
          this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.typeDataGridViewTextBoxColumn,
+            this.nameDataGridViewTextBoxColumn,
+            this.docTypeDataGridViewTextBoxColumn,
             this.customPropertiesDataGridViewTextBoxColumn2});
          this.dataGridView2.DataSource = this.newDocumentBindingSource;
          dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -429,29 +426,13 @@ namespace StainedGlassGuild.Compost.GUI
          this.dataGridView2.MultiSelect = false;
          this.dataGridView2.Name = "dataGridView2";
          this.dataGridView2.RowTemplate.Height = 28;
-         this.dataGridView2.Size = new System.Drawing.Size(862, 310);
+         this.dataGridView2.Size = new System.Drawing.Size(977, 391);
          this.dataGridView2.TabIndex = 0;
          this.dataGridView2.VirtualMode = true;
          this.dataGridView2.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellValueChanged);
          this.dataGridView2.CellValueNeeded += new System.Windows.Forms.DataGridViewCellValueEventHandler(this.OnCellValueNeeded_Documents);
          this.dataGridView2.CellValuePushed += new System.Windows.Forms.DataGridViewCellValueEventHandler(this.OnCellValuePushed_Documents);
          this.dataGridView2.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnRowEnter_Documents);
-         // 
-         // typeDataGridViewTextBoxColumn
-         // 
-         this.typeDataGridViewTextBoxColumn.DataPropertyName = "Type";
-         this.typeDataGridViewTextBoxColumn.HeaderText = "Type";
-         this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
-         // 
-         // customPropertiesDataGridViewTextBoxColumn2
-         // 
-         this.customPropertiesDataGridViewTextBoxColumn2.DataPropertyName = "CustomProperties";
-         this.customPropertiesDataGridViewTextBoxColumn2.HeaderText = "CustomProperties";
-         this.customPropertiesDataGridViewTextBoxColumn2.Name = "customPropertiesDataGridViewTextBoxColumn2";
-         // 
-         // newDocumentBindingSource
-         // 
-         this.newDocumentBindingSource.DataSource = typeof(Document);
          // 
          // groupBox2
          // 
@@ -462,7 +443,7 @@ namespace StainedGlassGuild.Compost.GUI
          this.groupBox2.Enabled = false;
          this.groupBox2.Location = new System.Drawing.Point(13, 3);
          this.groupBox2.Name = "groupBox2";
-         this.groupBox2.Size = new System.Drawing.Size(632, 350);
+         this.groupBox2.Size = new System.Drawing.Size(717, 431);
          this.groupBox2.TabIndex = 0;
          this.groupBox2.TabStop = false;
          this.groupBox2.Text = "Versions";
@@ -479,8 +460,7 @@ namespace StainedGlassGuild.Compost.GUI
          this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
          this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.filePathDataGridViewTextBoxColumn,
-            this.majorVersionNumberDataGridViewTextBoxColumn,
-            this.minorVersionNumberDataGridViewTextBoxColumn,
+            this.versionNumberDataGridViewTextBoxColumn,
             this.creationDateDataGridViewTextBoxColumn,
             this.lastModificationDateDataGridViewTextBoxColumn,
             this.customPropertiesDataGridViewTextBoxColumn1});
@@ -498,12 +478,50 @@ namespace StainedGlassGuild.Compost.GUI
          this.dataGridView3.MultiSelect = false;
          this.dataGridView3.Name = "dataGridView3";
          this.dataGridView3.RowTemplate.Height = 28;
-         this.dataGridView3.Size = new System.Drawing.Size(602, 310);
+         this.dataGridView3.Size = new System.Drawing.Size(687, 391);
          this.dataGridView3.TabIndex = 0;
          this.dataGridView3.VirtualMode = true;
          this.dataGridView3.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCellValueChanged);
          this.dataGridView3.CellValueNeeded += new System.Windows.Forms.DataGridViewCellValueEventHandler(this.OnCellValueNeeded_Versions);
          this.dataGridView3.CellValuePushed += new System.Windows.Forms.DataGridViewCellValueEventHandler(this.OnCellValuePushed_Versions);
+         // 
+         // titleDataGridViewTextBoxColumn
+         // 
+         this.titleDataGridViewTextBoxColumn.DataPropertyName = "Title";
+         this.titleDataGridViewTextBoxColumn.HeaderText = "Title";
+         this.titleDataGridViewTextBoxColumn.Name = "titleDataGridViewTextBoxColumn";
+         // 
+         // customPropertiesDataGridViewTextBoxColumn
+         // 
+         this.customPropertiesDataGridViewTextBoxColumn.DataPropertyName = "CustomProperties";
+         this.customPropertiesDataGridViewTextBoxColumn.HeaderText = "CustomProperties";
+         this.customPropertiesDataGridViewTextBoxColumn.Name = "customPropertiesDataGridViewTextBoxColumn";
+         // 
+         // newCompositionBindingSource
+         // 
+         this.newCompositionBindingSource.DataSource = typeof(StainedGlassGuild.Compost.DataModel.Composition);
+         // 
+         // nameDataGridViewTextBoxColumn
+         // 
+         this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+         this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+         this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+         // 
+         // docTypeDataGridViewTextBoxColumn
+         // 
+         this.docTypeDataGridViewTextBoxColumn.DataPropertyName = "DocType";
+         this.docTypeDataGridViewTextBoxColumn.HeaderText = "DocType";
+         this.docTypeDataGridViewTextBoxColumn.Name = "docTypeDataGridViewTextBoxColumn";
+         // 
+         // customPropertiesDataGridViewTextBoxColumn2
+         // 
+         this.customPropertiesDataGridViewTextBoxColumn2.DataPropertyName = "CustomProperties";
+         this.customPropertiesDataGridViewTextBoxColumn2.HeaderText = "CustomProperties";
+         this.customPropertiesDataGridViewTextBoxColumn2.Name = "customPropertiesDataGridViewTextBoxColumn2";
+         // 
+         // newDocumentBindingSource
+         // 
+         this.newDocumentBindingSource.DataSource = typeof(StainedGlassGuild.Compost.DataModel.Composition.Document);
          // 
          // filePathDataGridViewTextBoxColumn
          // 
@@ -511,17 +529,11 @@ namespace StainedGlassGuild.Compost.GUI
          this.filePathDataGridViewTextBoxColumn.HeaderText = "FilePath";
          this.filePathDataGridViewTextBoxColumn.Name = "filePathDataGridViewTextBoxColumn";
          // 
-         // majorVersionNumberDataGridViewTextBoxColumn
+         // versionNumberDataGridViewTextBoxColumn
          // 
-         this.majorVersionNumberDataGridViewTextBoxColumn.DataPropertyName = "MajorVersionNumber";
-         this.majorVersionNumberDataGridViewTextBoxColumn.HeaderText = "MajorVersionNumber";
-         this.majorVersionNumberDataGridViewTextBoxColumn.Name = "majorVersionNumberDataGridViewTextBoxColumn";
-         // 
-         // minorVersionNumberDataGridViewTextBoxColumn
-         // 
-         this.minorVersionNumberDataGridViewTextBoxColumn.DataPropertyName = "MinorVersionNumber";
-         this.minorVersionNumberDataGridViewTextBoxColumn.HeaderText = "MinorVersionNumber";
-         this.minorVersionNumberDataGridViewTextBoxColumn.Name = "minorVersionNumberDataGridViewTextBoxColumn";
+         this.versionNumberDataGridViewTextBoxColumn.DataPropertyName = "VersionNumber";
+         this.versionNumberDataGridViewTextBoxColumn.HeaderText = "VersionNumber";
+         this.versionNumberDataGridViewTextBoxColumn.Name = "versionNumberDataGridViewTextBoxColumn";
          // 
          // creationDateDataGridViewTextBoxColumn
          // 
@@ -543,17 +555,18 @@ namespace StainedGlassGuild.Compost.GUI
          // 
          // newVersionBindingSource
          // 
-         this.newVersionBindingSource.DataSource = typeof(Version);
+         this.newVersionBindingSource.DataSource = typeof(StainedGlassGuild.Compost.DataModel.Composition.Document.Version);
          // 
          // CompostBrowser
          // 
          this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
          this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-         this.ClientSize = new System.Drawing.Size(1578, 944);
+         this.ClientSize = new System.Drawing.Size(1778, 1144);
          this.Controls.Add(this.toolStrip1);
          this.Controls.Add(this.menuStrip1);
          this.Controls.Add(this.splitContainer1);
          this.MainMenuStrip = this.menuStrip1;
+         this.MinimumSize = new System.Drawing.Size(1000, 500);
          this.Name = "CompostBrowser";
          this.Text = "Compost";
          this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OnClosing);
@@ -567,16 +580,16 @@ namespace StainedGlassGuild.Compost.GUI
          this.splitContainer1.ResumeLayout(false);
          this.groupBox3.ResumeLayout(false);
          ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-         ((System.ComponentModel.ISupportInitialize)(this.newCompositionBindingSource)).EndInit();
          this.splitContainer2.Panel1.ResumeLayout(false);
          this.splitContainer2.Panel2.ResumeLayout(false);
          ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
          this.splitContainer2.ResumeLayout(false);
          this.groupBox1.ResumeLayout(false);
          ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-         ((System.ComponentModel.ISupportInitialize)(this.newDocumentBindingSource)).EndInit();
          this.groupBox2.ResumeLayout(false);
          ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
+         ((System.ComponentModel.ISupportInitialize)(this.newCompositionBindingSource)).EndInit();
+         ((System.ComponentModel.ISupportInitialize)(this.newDocumentBindingSource)).EndInit();
          ((System.ComponentModel.ISupportInitialize)(this.newVersionBindingSource)).EndInit();
          this.ResumeLayout(false);
          this.PerformLayout();
@@ -598,9 +611,6 @@ namespace StainedGlassGuild.Compost.GUI
       private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
       private System.Windows.Forms.ToolStripButton toolStripButton2;
       private System.Windows.Forms.ToolStripButton toolStripButton3;
-      private System.Windows.Forms.ToolStripButton toolStripButton4;
-      private System.Windows.Forms.ToolStripButton toolStripButton5;
-      private System.Windows.Forms.ToolStripButton toolStripButton6;
       private System.Windows.Forms.DataGridView dataGridView1;
       private System.Windows.Forms.DataGridView dataGridView2;
       private System.Windows.Forms.DataGridView dataGridView3;
@@ -616,16 +626,24 @@ namespace StainedGlassGuild.Compost.GUI
       private System.Windows.Forms.BindingSource newCompositionBindingSource;
       private System.Windows.Forms.BindingSource newDocumentBindingSource;
       private System.Windows.Forms.BindingSource newVersionBindingSource;
-      private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
-      private System.Windows.Forms.DataGridViewTextBoxColumn customPropertiesDataGridViewTextBoxColumn;
       private System.Windows.Forms.DataGridViewTextBoxColumn customPropertyDataGridViewTextBoxColumn;
       private System.Windows.Forms.DataGridViewTextBoxColumn typeDataGridViewTextBoxColumn;
-      private System.Windows.Forms.DataGridViewTextBoxColumn customPropertiesDataGridViewTextBoxColumn2;
-      private System.Windows.Forms.DataGridViewTextBoxColumn filePathDataGridViewTextBoxColumn;
       private System.Windows.Forms.DataGridViewTextBoxColumn majorVersionNumberDataGridViewTextBoxColumn;
       private System.Windows.Forms.DataGridViewTextBoxColumn minorVersionNumberDataGridViewTextBoxColumn;
+      private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
+      private System.Windows.Forms.DataGridViewTextBoxColumn customPropertiesDataGridViewTextBoxColumn;
+      private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+      private System.Windows.Forms.DataGridViewTextBoxColumn docTypeDataGridViewTextBoxColumn;
+      private System.Windows.Forms.DataGridViewTextBoxColumn customPropertiesDataGridViewTextBoxColumn2;
+      private System.Windows.Forms.DataGridViewTextBoxColumn filePathDataGridViewTextBoxColumn;
+      private System.Windows.Forms.DataGridViewTextBoxColumn versionNumberDataGridViewTextBoxColumn;
       private System.Windows.Forms.DataGridViewTextBoxColumn creationDateDataGridViewTextBoxColumn;
       private System.Windows.Forms.DataGridViewTextBoxColumn lastModificationDateDataGridViewTextBoxColumn;
       private System.Windows.Forms.DataGridViewTextBoxColumn customPropertiesDataGridViewTextBoxColumn1;
+      private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem multidocumentCompositionToolStripMenuItem;
+      private System.Windows.Forms.ToolStripMenuItem multipleVersionsCompositionToolStripMenuItem;
+      private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+      private System.Windows.Forms.ToolStripMenuItem configureLibraryToolStripMenuItem;
    }
 }

@@ -59,5 +59,35 @@ namespace StainedGlassGuild.Compost.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ImportMultiDocumentCompositionButtonImage {
+            get {
+                object obj = ResourceManager.GetObject("ImportMultiDocumentCompositionButtonImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ImportMultiVersionCompositionButtonImage {
+            get {
+                object obj = ResourceManager.GetObject("ImportMultiVersionCompositionButtonImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ImportSingleFileCompositionButtonImage {
+            get {
+                object obj = ResourceManager.GetObject("ImportSingleFileCompositionButtonImage", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
